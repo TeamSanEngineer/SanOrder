@@ -1,11 +1,26 @@
 <nav  class="navbar navbar-expand-lg navbar-dark bg-black">
-  <a class="navbar-brand"  style="color:white" >San Engineering</a>
+  <!-- <a class="navbar-brand"  style="color:white" >San Engineering</a> -->
+  <a  class="navbar-brand mb-0 h1"  style="color:white" >San Engineering</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
       <span class="navbar-toggler-icon"></span>
   </button>
   <div id="navbarNavDropdown" class="navbar-collapse collapse">
       <ul class="navbar-nav mr-auto">
-          <li></li>
+          <!-- <li style="color:white" >Home</li> -->
+          <li class="nav-item active">
+            <a class="nav-link" href="/sanorder">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Product
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">Action</a>
+              <a class="dropdown-item" href="#">Another action</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">Something else here</a>
+            </div>
+          </li>
       </ul>
 
 
@@ -49,6 +64,7 @@
 <section>
     <div  style="background: url(images/blue-002.png) no-repeat center center fixed; -webkit-background-size: cover; -moz-background-size: cover; -o-background-size: cover; background-size: cover;">
       <div class="container">
+
         <div class="row">
           <div class="col-12" align="center">
             <h1><img src="images/logo-1.png"  alt=""/></h1>
@@ -56,7 +72,67 @@
             <p class="fontcow">รับผลิต,ออกแบบ,ลับคมเครื่องมือตัด(Cutting Tools)ทุกชนิดที่ใช้ในงานอุตสาหกรรม</p>           
           </div>
         </div>
+                   
+                      
+        
       </div>
+
+      <nav aria-label="breadcrumb">
+  <ol id="getbreadcrumb" class="breadcrumb">
+    <!-- <li class="breadcrumb-item"><a href="">Home</a></li> -->
+    <!-- <li class="breadcrumb-item active" aria-current="page">Products</li> -->
+    <!-- <li class="breadcrumb-item active" aria-current="page">Data</li> -->
+  </ol>
+</nav>
     </div>
 </section>
 <br>
+
+<div id="demo"></div>
+
+<script>
+ 
+ console.log( $(location).attr('href'));
+
+ const parts = [{"text": 'Home', "link": '/'}];
+
+ const here = location.href.split('/').slice(3);
+    // console.log(here)
+  if(here[1]=="" || here[1]=="index.php"  )
+  {
+    $( "#getbreadcrumb" ).append( '<li class="breadcrumb-item mycapitalize active" aria-current="page">Home</li>');
+  }
+  else{
+    // $( "#getbreadcrumb" ).append('<li class="breadcrumb-item"><a href="/sanorder">Products</a></li>');
+    for (let i = 0; i < here.length; i++) {
+      const part = here[i];
+      console.log(i)
+      console.log(part)
+      
+      // $( "#getbreadcrumb" ).append('<li class="breadcrumb-item"><a href="'+here[i]+'">Products</a></li>');
+      // if(i == 0 && here[1]=="" || here[1]=="index.php" )
+      // {
+      //   $( "#getbreadcrumb" ).append( '<li class="breadcrumb-item active" aria-current="page">Products A</li>');
+      //   console.log("I")
+      // }
+      // else if(i == 0 && here[1]!=""){
+      //   $( "#getbreadcrumb" ).append('<li class="breadcrumb-item"><a href="index.php">Products</a></li>');
+      //   console.log("A")
+      // }
+     
+        var text = decodeURIComponent(part).split('.')[0];
+        console.log(text)
+        if(i==0){
+          text = "Home";
+      }
+        const link = '/' + here.slice(0, i + 1).join('/');
+        console.log(link)
+        // parts.push({"text": text, "link": link});
+        // console.log(parts)
+        
+        $( "#getbreadcrumb" ).append('<li class="breadcrumb-item mycapitalize"><a href="'+link+'">'+text+'</a></li>');
+
+    }    
+  }
+                      
+</script>

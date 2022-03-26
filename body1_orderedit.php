@@ -67,7 +67,6 @@
           <div class="text-center">
              <img src="images/material.png" class="rounded" >
           </div>
-          <!-- <input id="numberBox" type="number" min="0" max="100" step="10"  value="0"  /> -->
           <div class="form-group row">
             <label class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">D1:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
@@ -156,7 +155,7 @@
           <div class="form-group row">
             <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">Denti:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-              <input type="text"  class="form-control" id="txtden" name="txtden" value="<?php echo $denti; ?>" >
+              <input type="number"  class="form-control" id="txtden" name="txtden" value="<?php echo $denti; ?>" >
             </div>
           </div>  
     
@@ -186,7 +185,7 @@
           <div class="form-group row justify-content-end">
             <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">QUANTITY:</label>
               <div class="col-sm-12 col-md-12 col-lg-3">
-                <input type="text" tye="number" class="form-control" id="txtqua" name="txtqua" value="  <?php echo $quality; ?>" >
+                <input type="number" class="form-control" id="txtqua" name="txtqua" value=<?php echo $quality; ?>  >
             </div>
           </div>
 
@@ -197,10 +196,10 @@
             <label class="col-form-label">Drawing Attach File 1:</label>
             <div class="col-sm-12 col-md-12 col-lg-5">
               <div class="input-group">
-                <span  id="txtfupload1" class="form-control"><?php echo $fupload1; ?></span>
+                <span   id="txtfupload1" class="form-control"><?php echo $fupload1; ?></span>
                 <span class="input-group-btn">
                   <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
-                  <input  name="fupload1" id="fupload1" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: block;" type="file">
+                  <input  name="fupload1" id="fupload1" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file">
                 </span>
               </div>
             </div>
@@ -214,7 +213,7 @@
                 <span  id="txtfupload2" class="form-control"><?php echo $fupload2; ?></span>
                 <span class="input-group-btn">
                   <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
-                  <input  name="fupload2" id="fupload2" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: block;" type="file">
+                  <input  name="fupload2" id="fupload2" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file">
                 </span>
               </div>
             </div>
@@ -228,7 +227,7 @@
                 <span  id="txtfupload3" class="form-control"><?php echo $fupload3; ?></span>
                 <span class="input-group-btn">
                   <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
-                  <input  name="fupload3" id="fupload3" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: block;" type="file" >
+                  <input  name="fupload3" id="fupload3" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file" >
                 </span>
               </div>
             </div>

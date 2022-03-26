@@ -1,6 +1,6 @@
 <?php
     $userid = $userlevel = $fristname = $lastname =  "";
-    $diameter= $diameter2 = $clength = $length = $quality = $description = $tel = $denti = 0;
+    $diameter= $diameter2 = $flength = $length = $quality = $description = $tel = $denti = 0;
  
        
     $sql = "SELECT
@@ -9,15 +9,16 @@
     fristname,
     lastname,
     diameter2,
-    clength,
+    flength,
     length,
     helix,
-    material,
+    toolmaterial,
     coating,
     quality,
     description,
     tel,
-    denti,
+    workmaterial,
+    machine,
     fileupload1,
     fileupload2,
     fileupload3
@@ -33,15 +34,16 @@
         $lastname =   $row['lastname'];
         $diameter =  $row ['diameter'];
         $diameter2 =  $row ['diameter2'];
-        $clength =  $row ['clength'];
+        $flength =  $row ['flength'];
         $length =  $row ['length'];
         $helix =  $row ['helix'];
-        $material =  $row ['material'];
+        $material =  $row ['toolmaterial'];
         $coating =  $row ['coating'];
         $quality =  $row ['quality'];
         $description =  $row ['description'];
         $tel =  $row ['tel'];
-        $denti =  $row ['denti'];
+        $workmaterial =  $row ['workmaterial'];
+        $machine = $row['machine'];
         $fupload1 = $row['fileupload1'];
         $fupload2 = $row['fileupload2'];
         $fupload3 = $row['fileupload3'];
@@ -75,15 +77,9 @@
             </div>
            
 
-            <label class="col-sm-12 col-md-12 col-lg-1 col-form-label">HELIX:</label>
+            <label class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">HELIX:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
             <input  readonly type="text"  class="form-control" id="slchelix"  name="slchelix" value="<?php echo  $helix ?>"  >
-              <!-- <select id="slchelix" name="slchelix" class="form-select form-control" >
-                <option value="" hidden >Open this select menu</option>
-                <option value="30">30</option>
-                <option value="60">60</option>
-              </select> -->
-
             </div>
           </div>
 
@@ -93,32 +89,23 @@
               <input  readonly type="text"  class="form-control" id="txtdiameter2" min="0" max="100" name="txtdiameter2" value="<?php echo  $diameter2 ?>" >
             </div>
          
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">MATERIAL:</label>
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Tool Material:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
             <input  readonly type="text"  class="form-control" id="slcmaterial"  name="slcmaterial" value="<?php echo  $material ?>"  >
-              <!-- <select id="slcmaterial" name="slcmaterial" class="form-select form-control" >
-                <option value="" hidden >Open this select menu</option>
-                <option value="Iron">Iron</option>
-              </select> -->
             </div>
           </div>
 
           <div class="form-group row">
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">CL:</label>
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">FL:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-              <input  readonly type="text"  class="form-control" id="txtcl" name="txtcl"  value="<?php echo  $clength ?>" >
+              <input  readonly type="text"  class="form-control" id="txtcl" name="txtcl"  value="<?php echo  $flength ?>" >
             </div>
             
        
 
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">COATING:</label>
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Coating Type:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
             <input  readonly type="text"  class="form-control" id="slccoating"  name="slccoating" value="<?php echo $coating; ?>"  >
-              <!-- <select id="slccoating" name="slccoating" class="form-select form-control" >
-                <option value="" hidden >Open this select menu</option>
-                <option value="Low">Low</option>
-                <option value="High ">High </option>
-              </select> -->
             </div>
           </div>
           
@@ -127,20 +114,26 @@
             <div class="col-sm-12 col-md-12 col-lg-3">
               <input  readonly type="text"  class="form-control" id="txtlength" name="txtlength" value="<?php echo  $length ?>" >
             </div>
+
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Work Material:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3">
+            <input  readonly type="text"  class="form-control" id="txtworkmaterial"  name="txtworkmaterial" value="<?php echo $workmaterial; ?>"  >
+            </div>
           </div>
           
-          <div class="form-group row">
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">Denti:</label>
-            <div class="col-sm-12 col-md-12 col-lg-3">
-              <input  readonly type="text"  class="form-control" id="txtden" name="txtden" value="<?php echo $denti; ?>" >
-            </div>
-          </div>  
+    
     
         
 
           <br>
           
           <div class="form-group row justify-content-end">
+
+          <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">Machine:</label>
+              <div class="col-sm-12 col-md-12 col-lg-3">
+                <input  readonly type="text" tye="text" class="form-control" id="txtmachine" name="txtmachine" value="<?php echo $machine; ?>" >
+            </div>
+
             <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">QUANTITY:</label>
               <div class="col-sm-12 col-md-12 col-lg-3">
                 <input  readonly type="text" tye="text" class="form-control" id="txtqua" name="txtqua" value="<?php echo $quality; ?>" >
@@ -157,7 +150,7 @@
                 <span  id="txtfupload1" class="form-control ronly"><?php echo $fupload1; ?></span>
                 <span class="input-group-btn">
                   <!-- <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span> -->
-                  <!-- <input  readonly value="<?php echo $fupload1; ?>"  name="fupload1" id="fupload1" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file"> -->
+                  <!-- <input  readonly name="fupload1" id="fupload1" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file"> -->
                 </span>
               </div>
             </div>
@@ -171,7 +164,7 @@
                 <span  id="txtfupload2" class="form-control ronly"><?php echo $fupload2; ?></span>
                 <span class="input-group-btn">
                   <!-- <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span> -->
-                  <!-- <input  readonly value="<?php echo $fupload2; ?>" name="fupload2" id="fupload2" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file"> -->
+                  <!-- <input  readonly  name="fupload2" id="fupload2" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file"> -->
                 </span>
               </div>
             </div>
@@ -185,7 +178,7 @@
                 <span  id="txtfupload3" class="form-control ronly"><?php echo $fupload3; ?></span>
                 <span class="input-group-btn">
                   <!-- <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span> -->
-                  <!-- <input  readonly value="<?php echo $fupload3; ?>" name="fupload3" id="fupload3" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file" > -->
+                  <!-- <input  readonly  name="fupload3" id="fupload3" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file" > -->
                 </span>
               </div>
             </div>

@@ -117,4 +117,3 @@ $userlevel = "";
     </div> -->
     
 </form>
-<?php include('script_displayorder.php');?>

@@ -54,11 +54,11 @@
   var userid =  "<?php echo $userid ?>";
   var id =  "<?php echo  $_GET['id'] ?>" ;
 
-  console.log(fupload1)
+  // console.log(fupload1)
 
   // console.log(userid);
-  // console.log("<?php echo $userid ?>");
-  // console.log("<?php echo  $_GET['id'] ?>");
+  console.log("<?php echo $userid ?>");
+  console.log("<?php echo  $_GET['id'] ?>");
 
   if(userid != "")
   {
@@ -199,23 +199,17 @@
 
 
 
-var fupload1 = "<?php $fupload1 ?>";
-var fupload2 = "<?php $fupload2 ?>";
-var fupload3 = "<?php $fupload3 ?>";
+var fupload1 = "<?php echo $fupload1 ?>";
+var fupload2 = "<?php echo $fupload2 ?>";
+var fupload3 = "<?php echo $fupload3 ?>";
 
-var chkfile1  = true;
-var chkfile2  = true;
-var chkfile3  = true;
+console.log(fupload1)
+console.log(fupload2)
+console.log(fupload3)
+var chkfile1  = 0;
+var chkfile2  = 0;
+var chkfile3  = 0;
 
-if ( fupload1 == "" ){
-  chkfile1 = false;
-}
-if ( fupload2 == "" ){
-  chkfile2 = false;
-}
-if ( fupload3 == "" ){
-  chkfile3 = false;
-}
 
 console.log(chkfile1);
 console.log(chkfile2);
@@ -236,12 +230,12 @@ $("#fupload1").change(function () {
       alert("Max file size 10MB");
       $('#txtfupload1').html('');
       $(this).val('');
-      chkfile1 = false;
+      chkfile1 = 1;
     }
     else
     {
       $('#txtfupload1').html($(this).val().split(/[\\|/]/).pop());
-      chkfile1 = true;
+      chkfile1 = 2;
     }
 });
 
@@ -256,12 +250,12 @@ $("#fupload2").change(function () {
       alert("Max file size 10MB");
       $('#txtfupload2').html('');
       $(this).val('');
-      chkfile2 = false;
+      chkfile2 = 1;
     }
     else
     {
       $('#txtfupload2').html($(this).val().split(/[\\|/]/).pop());
-      chkfile2 = true;
+      chkfile2 = 2;
     }
 });
 
@@ -276,10 +270,12 @@ $("#fupload3").change(function () {
       alert("Max file size 10MB");
       $('#txtfupload3').html('');
       $(this).val('');
+      chkfile3 = 1;
     }
     else
     {
       $('#txtfupload3').html($(this).val().split(/[\\|/]/).pop());
+      chkfile3 = 2;
     }
 });
 
@@ -304,7 +300,7 @@ $("#fupload3").change(function () {
             $(".loading").css("display","block")
             savedata()
           } else if (result.isDenied) {
-            console.log("WWW");
+            console.log("ERROR");
           }
         })
     }
@@ -318,9 +314,22 @@ $("#fupload3").change(function () {
   });
 
         function savedata(){
+            
               var formData = new FormData(document.getElementById("form1"));
               formData.append("userid", <?php echo "\"".$userid."\""; ?>)
               formData.append("orderid", <?php echo "\"".$_GET['id']."\""; ?>)
+              formData.append("chkfile1", chkfile1 )
+              formData.append("chkfile2", chkfile2 )
+              formData.append("chkfile3", chkfile3 )
+              formData.append("txtf1", $("#txtfupload1").text())
+              formData.append("txtf2", $("#txtfupload2").text())
+              formData.append("txtf3", $("#txtfupload3").text())
+              console.log(chkfile1);
+              console.log(chkfile2);
+              console.log(chkfile3);
+              // console.log("LOL"+$( "#txtfupload1" ).text())
+              // console.log( "LOL"+$("#txtfupload2" ).text())
+              // console.log( "LOL"+$("#txtfupload3" ).text())
               $.ajax({
               url: 'ajax_orderedit.php',
               type: "POST",
@@ -338,15 +347,17 @@ $("#fupload3").change(function () {
                           icon: 'success',
                           title: 'ยินดีด้วย',
                           text: data.reason ,
-                        })
-                    //     window.location.href = 'index.php';
-                    console.log(data);
+                        }).then(function() {
+                          $(".loading").css("display","block")
+                          window.location = window.location.href;
+                         // console.log(data);
+                        }); 
                 }
                 else{
                   $(".loading").css("display","none")
                       Swal.fire({
                           icon: 'error',
-                          title: 'Oops...',
+                          title: 'Data Error',
                           text: data.reason ,
                         })
                 }
@@ -369,6 +380,7 @@ $("#fupload3").change(function () {
                         console.log('Unknow Error.\n'+xhr.responseText);
                     }
                   var errorMessage = xhr.status + ': ' + xhr.statusText;
+                  $(".loading").css("display","none")
                   console.log(errorMessage);
                 },
           });

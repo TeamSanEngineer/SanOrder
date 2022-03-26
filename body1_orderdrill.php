@@ -20,15 +20,27 @@
           <button type="button" class="btn btn-secondary " id="txtback" onclick="window.location='index.php';" >HOME</button>
         </div>
           <div class="text-center">
-             <img src="images/material.png" class="rounded" >
+             <img src="images/drill.png" class="rounded" >
           </div>
+
+          <div class="form-group row pl">
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
+              <label class="form-check-label" for="inlineRadio1">Drill</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
+              <label class="form-check-label" for="inlineRadio2">Reamer</label>
+            </div>
+          </div>
+        <br>
           <!-- <input id="numberBox" type="number" min="0" max="100" step="10"  value="0"  /> -->
           <div class="form-group row">
             <label class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">D1:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
               <input type="number" min="0" max="100" step="1"   class="form-control" id="txtdiameter"  name="txtdiameter"  >
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-4">
+            <div class="col-sm-12 col-md-12 col-lg-3">
               <span class="p-2">0 </span>
                <input id="sld1" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0"/>
               <span class="p-2">100</span>
@@ -36,11 +48,17 @@
                 <span id="sld1CurrentSliderValLabel">Current Slider Value: <span id="sld1SliderVal">0</span></span>
               </p>
             </div>
-            <label class="col-sm-12 col-md-12 col-lg-1 col-form-label">HELIX:</label>
+            <label class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Helix:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
               <select name="slchelix" class="form-select form-control" >
                 <option value="" hidden selected>Open this select menu</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+                <option value="25">25</option>
                 <option value="30">30</option>
+                <option value="35">35</option>
+                <option value="45">45</option>
                 <option value="60">60</option>
               </select>
             </div>
@@ -51,7 +69,7 @@
             <div class="col-sm-12 col-md-12 col-lg-3">
               <input type="number"  class="form-control" id="txtdiameter2" min="0" max="100" name="txtdiameter2"  >
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-4">
+            <div class="col-sm-12 col-md-12 col-lg-3">
               <span class="p-2">0 </span>
                <input id="sld2" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="10" data-slider-value="0"/>
               <span class="p-2">100</span>
@@ -59,22 +77,25 @@
                 <span id="sld2CurrentSliderValLabel">Current Slider Value: <span id="sld2SliderVal">0</span></span>
               </p>
             </div>
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">MATERIAL:</label>
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Tool Material:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-              <select name="slcmaterial" class="form-select form-control" >
+              <select name="slctoolmaterial" class="form-select form-control" >
                 <option value="" hidden selected>Open this select menu</option>
-                <option value="Iron">Iron</option>
+                <option value="Carbide">Carbide</option>
+                <option value="HSS">HSS</option>
+                <option value="PCD">PCD</option>
+                <option value="CBN">CBN</option>
               </select>
             </div>
           </div>
 
           <div class="form-group row">
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">CL:</label>
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">FL:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-              <input type="number"  class="form-control" id="txtcl" name="txtcl"  min="0" max="100" >
+              <input type="number"  class="form-control" id="txtfl" name="txtfl"  min="0" max="100" >
             </div>
             
-            <div class="col-sm-12 col-md-12 col-lg-4">
+            <div class="col-sm-12 col-md-12 col-lg-3">
               <span class="p-2">0 </span>
                <input id="sld3" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0"/>
               <span class="p-2">100</span>
@@ -83,12 +104,18 @@
               </p>
             </div>
 
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">COATING:</label>
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Coating Type:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
               <select name="slccoating" class="form-select form-control" >
                 <option value="" hidden selected>Open this select menu</option>
-                <option value="Low">Low</option>
-                <option value="High ">High </option>
+                <option value="TIN">TIN</option>
+                <option value="TICN">TICN</option>
+                <option value="TIALN">TIALN</option>
+                <option value="CrN">CrN</option>
+                <option value="DLC">DLC</option>
+                <option value="ACX">ACX</option>
+                <option value="AlCrN">AlCrN</option>
+                <option value="Latuma">Latuma</option>
               </select>
             </div>
           </div>
@@ -98,7 +125,7 @@
             <div class="col-sm-12 col-md-12 col-lg-3">
               <input type="number"  class="form-control" id="txtlength" name="txtlength" min="0" max="100" >
             </div>
-            <div class="col-sm-12 col-md-12 col-lg-4">
+            <div class="col-sm-12 col-md-12 col-lg-3">
               <span class="p-2">0 </span>
                <input id="sld4" type="text" data-slider-min="0" data-slider-max="100" data-slider-step="1" data-slider-value="0"/>
               <span class="p-2">100</span>
@@ -106,42 +133,31 @@
                 <span id="sld4CurrentSliderValLabel">Current Slider Value: <span id="sld4SliderVal">0</span></span>
               </p>
             </div>
+
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Work Material:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3">
+              <input type="text"  class="form-control" id="txtworkmtl" name="txtworkmaterial" >
+            </div>
           </div>
           
-          <div class="form-group row">
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">Denti:</label>
-            <div class="col-sm-12 col-md-12 col-lg-3">
-              <input type="text"  class="form-control" id="txtden" name="txtden" >
-            </div>
-          </div>  
-    
-        
 
-          <br>
-
-          <!-- <div class="form-group row">
-              <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">Denti:</label>
-                <div class="col-sm-12 col-md-12 col-lg-3">
-                  <input type="text"  class="form-control" id="txtden1" >
-                </div>
-
-                <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">Denti:</label>
-                <div class="col-sm-12 col-md-12 col-lg-3">
-                  <input type="text"  class="form-control " id="txtden2" >
-                </div>
-
-                <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">Denti:</label>
-                <div class="col-sm-12 col-md-12 col-lg-3">
-                  <input type="text"  class="form-control" id="txtden3" >
-                </div>
-          </div>   -->
-
-          <br>
-          
           <div class="form-group row justify-content-end">
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">Machine:</label>
+              <div class="col-sm-12 col-md-12 col-lg-3">
+
+              <select name="slcmachine" class="form-select form-control" >
+                <option value="" hidden selected>Open this select menu</option>
+                <option value="NC Lathe">Nc Lathe</option>
+                <option value="Machinning Cuter">Machinning Cuter</option>
+                <option value="CNC Lathe">CNC Lathe</option>
+                <option value="Other">CrN</option>
+              </select>
+
+            </div>
+
             <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">QUANTITY:</label>
               <div class="col-sm-12 col-md-12 col-lg-3">
-                <input type="text" tye="number" class="form-control" id="txtqua" name="txtqua" >
+                <input  type="number" class="form-control" id="txtqua" name="txtqua" >
             </div>
           </div>
 

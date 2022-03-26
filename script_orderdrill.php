@@ -24,14 +24,14 @@
   });
 
   $("#sld3").slider();
-  $("#txtcl").val($("#sld3").val());
+  $("#txtfl").val($("#sld3").val());
   $("#sld3").on("slide", function(slideEvt) {
     $("#sld3SliderVal").text(slideEvt.value);
-    $("#txtcl").val(slideEvt.value);
+    $("#txtfl").val(slideEvt.value);
   });
   $("#sld3").on("slideStop", function(slideEvt){
     $("#sld3SliderVal").text(slideEvt.value);
-    $("#txtcl").val(slideEvt.value);
+    $("#txtfl").val(slideEvt.value);
   });
 
 
@@ -129,7 +129,7 @@
         }); 
 
 
-        $( "#txtcl" ).change(function() {
+        $( "#txtfl" ).change(function() {
           var max = parseInt($(this).attr('max'));
           var min = parseInt($(this).attr('min'));
           var val = $(this).val();
@@ -141,7 +141,7 @@
           if ($(this).val() > max)
           {
               $(this).val(max);
-              console.log( $( "#txtcl" ).val())
+              console.log( $( "#txtfl" ).val())
               $("#sld3SliderVal").text($(this).val());
               $('#sld3').slider('setValue', $(this).val());
 
@@ -149,14 +149,14 @@
           else if ($(this).val() < min)
           {
               $(this).val(min);
-              console.log( $( "#txtcl" ).val())
+              console.log( $( "#txtfl" ).val())
               $("#sld3SliderVal").text($(this).val());
               $('#sld3').slider('setValue', $(this).val());
           }    
           else if (min<$(this).val()<max)
           {
             $(this).val(Math.round($(this).val()));
-              console.log( $( "#txtcl" ).val())
+              console.log( $( "#txtfl" ).val())
               $("#sld3SliderVal").text($(this).val());
               $('#sld3').slider('setValue', $(this).val());
           }       
@@ -311,11 +311,13 @@ $("#fupload3").change(function () {
                   $(".loading").css("display","none")
                       Swal.fire({
                           icon: 'success',
-                          title: 'ยินดีด้วย',
+                          title: 'ข้อมูลบันทึกเส็รจสิ้นกำลังเข้าสู้หน้าแรก',
                           text: data.reason ,
-                        })
-                    //     window.location.href = 'index.php';
-                    console.log(data);
+                        }).then(function() {
+                          $(".loading").css("display","block")
+                          window.location.href =  'index.php';
+                         // console.log(data);
+                        }); 
                 }
                 else{
                   $(".loading").css("display","none")
@@ -325,9 +327,6 @@ $("#fupload3").change(function () {
                           text: data.reason ,
                         })
                 }
-                   
-                    // console.log(data['reason']);
-                    // console.log(data['success']);
               },
               error: (xhr, status, error) => {
                 if (xhr.status==0) {
@@ -359,11 +358,13 @@ $("#fupload3").change(function () {
         {
           checkconfirm = false;
           txtconfirm = "กรุณากรอกชื่อ";
+          return
         }
         if($('#txtlname').val() == "" )
         {
           checkconfirm = false;
           txtconfirm = "กรุณากรอกนามสกุล";
+          return
         }
       }
 </script>
