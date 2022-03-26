@@ -130,6 +130,9 @@
         // parts.push({"text": text, "link": link});
         // console.log(parts)
         
+        if (i === here.length - 1) {
+          console.log("last"+text+"  "+i)
+        }
         $( "#getbreadcrumb" ).append('<li class="breadcrumb-item mycapitalize"><a href="'+link+'">'+text+'</a></li>');
 
     }    
