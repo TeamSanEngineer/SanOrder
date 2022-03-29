@@ -34,42 +34,41 @@ else
 	$fileupload3 = $_FILES["fupload3"]["name"];
 }
 try {
-	$success = true;
-	$d_update=date('Y-m-d H:i:s', strtotime('+543 year'));
+	// $d_update=date('Y-m-d H:i:s', strtotime('+543 year'));
 
-	$sql = "UPDATE san_order SET  
-	diameter = '".$_POST['txtdiameter']."',
-	diameter2  = '".$_POST['txtdiamete2']."',
-	clength = '".$_POST['txtcl']."',
-	length = '".$_POST['txtlength']."',
-	helix = '".$_POST['slchelix']."',
-	material = '".$_POST['slcmaterial']."',
-	coating = '".$_POST['slccoating']."',
-	quality = '".$_POST['txtqua']."',
-	description = '".$_POST['txtdes']."',
-	denti =  '".$_POST['txtden']."',
-	fileupload1 = '".$fileupload1."',
-	fileupload2 = '".$fileupload2."',
-	fileupload3 = '".$fileupload3."',
-
+	// $sql = "UPDATE san_order SET  
+	// diameter = '".$_POST['txtdiameter']."',
+	// diameter2  = '".$_POST['txtdiamete2']."',
+	// clength = '".$_POST['txtcl']."',
+	// length = '".$_POST['txtlength']."',
+	// helix = '".$_POST['slchelix']."',
+	// material = '".$_POST['slcmaterial']."',
+	// coating = '".$_POST['slccoating']."',
+	// quality = '".$_POST['txtqua']."',
+	// description = '".$_POST['txtdes']."',
+	// denti =  '".$_POST['txtden']."',
+	// fileupload1 = '".$fileupload1."',
+	// fileupload2 = '".$fileupload2."',
+	// fileupload3 = '".$fileupload3."',
 
 
-    d_update =   '$d_update'
-    WHERE   orderid = '".$_POST['orderid']."'  ";
 
-	if (mysqli_query($con, $sql)) 
-	{	
-		move_uploaded_file($_FILES["fupload1"]["tmp_name"],"doc/".$_FILES["fupload1"]["name"]);
-        move_uploaded_file($_FILES["fupload2"]["tmp_name"],"doc/".$_FILES["fupload2"]["name"]);
-        move_uploaded_file($_FILES["fupload3"]["tmp_name"],"doc/".$_FILES["fupload3"]["name"]);  	
-		$reason = "Data update successfully !";
-	}
-	else
-	{
-		$success = false;
-		$reason = "Error";
-	}
-	mysqli_close($con);
+    // d_update =   '$d_update'
+    // WHERE   orderid = '".$_POST['orderid']."'  ";
+
+	// if (mysqli_query($con, $sql)) 
+	// {	
+	// 	move_uploaded_file($_FILES["fupload1"]["tmp_name"],"doc/".$_FILES["fupload1"]["name"]);
+    //     move_uploaded_file($_FILES["fupload2"]["tmp_name"],"doc/".$_FILES["fupload2"]["name"]);
+    //     move_uploaded_file($_FILES["fupload3"]["tmp_name"],"doc/".$_FILES["fupload3"]["name"]);  	
+	// 	$reason = "Data update successfully !";
+	// }
+	// else
+	// {
+	// 	$success = false;
+	// 	$reason = "Error";
+	// }
+	// mysqli_close($con);
 
 } catch (Exception $ex) 
 {   

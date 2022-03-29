@@ -23,17 +23,18 @@ $userlevel = "";
 				<table id="example"  style="width:100%"  class="table display nowrap">
         <thead>
             <tr>
-                     <th>ลำดับ</th>
-                     <th  class="text-center">ชื่อรายการ</th>
-                     <th  class="text-center">ชื่อ</th>
-                     <th  class="text-center">แสดงข้อมูล</th>
-                     <th  class="text-center">แก้ไข</th>
+                     <th>No.</th>
+                     <th  class="text-center">Order ID</th>
+                     <th  class="text-center">Name</th>
+                     <th  class="text-center">Type</th>
+                     <th  class="text-center">Show</th>
+                     <th  class="text-center">Edit</th>
                 </tr>
 					</thead>     
 
           <tbody>
                 <?php
-                //
+                
                 include 'connectdb.php';
 
                 if($userlevel == "admin")
@@ -48,6 +49,7 @@ $userlevel = "";
                   san_order.diameter,
                   san_order.fristname,
                   san_order.lastname,
+                  san_order.type,
                   `user`.userid,
                   `user`.fristname,
                   `user`.lastname,
@@ -68,6 +70,7 @@ $userlevel = "";
                       <td><?php echo  $x ; ?>  </td>
                       <td class="text-center id"><?php echo $row["orderid"]; ?></td>
                       <td class="text-center"><?php echo $row["fristname"]; ?></td>
+                      <td class="text-center mycapitalize"><?php echo $row["type"]; ?></td>
                       <td class="text-center"></td>
                       <td class="text-center"></td>
                 </tr>      

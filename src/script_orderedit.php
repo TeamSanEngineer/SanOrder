@@ -26,15 +26,15 @@
   });
 
   $("#sld3").slider();
-  $("#txtcl").val($("#sld3").val());
+  $("#txtfl").val($("#sld3").val());
   $("#sld3SliderVal").text($("#sld3").val());
   $("#sld3").on("slide", function(slideEvt) {
     $("#sld3SliderVal").text(slideEvt.value);
-    $("#txtcl").val(slideEvt.value);
+    $("#txtfl").val(slideEvt.value);
   });
   $("#sld3").on("slideStop", function(slideEvt){
     $("#sld3SliderVal").text(slideEvt.value);
-    $("#txtcl").val(slideEvt.value);
+    $("#txtfl").val(slideEvt.value);
   });
 
 
@@ -54,12 +54,6 @@
   var userid =  "<?php echo $userid ?>";
   var id =  "<?php echo  $_GET['id'] ?>" ;
 
-  // console.log(fupload1)
-
-  // console.log(userid);
-  console.log("<?php echo $userid ?>");
-  console.log("<?php echo  $_GET['id'] ?>");
-
   if(userid != "")
   {
     $("#txtfname").attr("readonly", "true");
@@ -70,6 +64,7 @@
   $('#slchelix').val(<?php echo $helix ?>);
   $('#slcmaterial').val(<?php echo "\"".$material."\"" ?>);
   $('#slccoating').val(<?php echo "\"".$coating."\"" ?>);
+  $('#slcmachine').val(<?php echo "\"".$machine."\"" ?>);
 
 
   $(function () {
@@ -135,7 +130,7 @@
         }); 
 
 
-        $( "#txtcl" ).change(function() {
+        $( "#txtfl" ).change(function() {
           var max = parseInt($(this).attr('max'));
           var min = parseInt($(this).attr('min'));
           var val = $(this).val();
@@ -203,17 +198,13 @@ var fupload1 = "<?php echo $fupload1 ?>";
 var fupload2 = "<?php echo $fupload2 ?>";
 var fupload3 = "<?php echo $fupload3 ?>";
 
-console.log(fupload1)
-console.log(fupload2)
-console.log(fupload3)
+
 var chkfile1  = 0;
 var chkfile2  = 0;
 var chkfile3  = 0;
 
 
-console.log(chkfile1);
-console.log(chkfile2);
-console.log(chkfile3);
+
 var fileSize;
 var sizeInMb;
 var sizeLimit;
@@ -243,8 +234,7 @@ $("#fupload2").change(function () {
      fileSize = this.files[0];
      sizeInMb = fileSize.size;
      sizeLimit = 1024*1024*10;
-     console.log("FILE UPLOAD",sizeInMb)
-     console.log("FILE SIZE",sizeLimit)
+ 
     if (sizeInMb > sizeLimit)
      {
       alert("Max file size 10MB");
@@ -263,8 +253,7 @@ $("#fupload3").change(function () {
      fileSize = this.files[0];
      sizeInMb = fileSize.size;
      sizeLimit = 1024*1024*10;
-     console.log("FILE UPLOAD",sizeInMb)
-     console.log("FILE SIZE",sizeLimit)
+    
     if (sizeInMb > sizeLimit)
      {
       alert("Max file size 10MB");
@@ -285,7 +274,6 @@ $("#fupload3").change(function () {
 
   $( "#txtconfirm" ).click(function() {
     checkstate()
-    console.log()
     if(checkconfirm == true)
     {
       Swal.fire({
@@ -300,14 +288,13 @@ $("#fupload3").change(function () {
             $(".loading").css("display","block")
             savedata()
           } else if (result.isDenied) {
-            console.log("ERROR");
           }
         })
     }
     else{
       Swal.fire({
               icon: 'error',
-              title: 'Oops...',
+              title: 'ERROR',
               text:  txtconfirm  ,
             })
     }
@@ -324,14 +311,9 @@ $("#fupload3").change(function () {
               formData.append("txtf1", $("#txtfupload1").text())
               formData.append("txtf2", $("#txtfupload2").text())
               formData.append("txtf3", $("#txtfupload3").text())
-              console.log(chkfile1);
-              console.log(chkfile2);
-              console.log(chkfile3);
-              // console.log("LOL"+$( "#txtfupload1" ).text())
-              // console.log( "LOL"+$("#txtfupload2" ).text())
-              // console.log( "LOL"+$("#txtfupload3" ).text())
+             
               $.ajax({
-              url: 'ajax_orderedit.php',
+              url: 'api/ajax_orderedit.php',
               type: "POST",
               cache: false,
               processData: false,
@@ -350,7 +332,6 @@ $("#fupload3").change(function () {
                         }).then(function() {
                           $(".loading").css("display","block")
                           window.location = window.location.href;
-                         // console.log(data);
                         }); 
                 }
                 else{
@@ -361,9 +342,7 @@ $("#fupload3").change(function () {
                           text: data.reason ,
                         })
                 }
-                   
-                    // console.log(data['reason']);
-                    // console.log(data['success']);
+                
               },
               error: (xhr, status, error) => {
                 if (xhr.status==0) {

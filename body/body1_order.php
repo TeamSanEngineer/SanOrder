@@ -1,7 +1,24 @@
 <?php
   
+    $sandatatype = "";
+    $numofteeth = false;
+    if($_GET['type'] == "drill")
+    {
+      $sandatatype = $_GET['type'];
+      $sanimg = "drill.png";
+    }
+    elseif($_GET['type'] == "reamer" )
+    {
+      $sandatatype = $_GET['type'];
+      $sanimg = "reamer.png";
+      $numofteeth = true;
+    }
+    else{
+        http_response_code(404);
+        include('my_404.php'); 
+        die();
+    }
     $userid = $userlevel = $fristname = $lastname = "";
- 
     if (isset($_SESSION["UserID"]))
     { 
       $userid =  $_SESSION["UserID"];
@@ -9,6 +26,8 @@
       $lastname = $_SESSION["Lastname"];
     }
     
+
+  
     
    
 ?>
@@ -16,29 +35,19 @@
 <form  id="form1" name="form1" method="post" >
 <section>
       <div class="container">
-      <div class="d-flex justify-content-center" >
-          <button type="button" class="btn btn-secondary " id="txtback" onclick="window.location='index.php';" >HOME</button>
+         <div class="d-flex justify-content-center" >
+          <p><h2><?php echo strtoupper($sandatatype)  ?></h2></p>
         </div>
           <div class="text-center">
-             <img src="images/drill.png" class="rounded" >
+             <img src="images/datatype/<?php echo $sanimg  ?>" class="rounded" >
           </div>
 
-          <!-- <div class="form-group row pl">
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1">
-              <label class="form-check-label" for="inlineRadio1">Drill</label>
-            </div>
-            <div class="form-check form-check-inline">
-              <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">
-              <label class="form-check-label" for="inlineRadio2">Reamer</label>
-            </div>
-          </div> -->
+        
         <br>
-          <!-- <input id="numberBox" type="number" min="0" max="100" step="10"  value="0"  /> -->
           <div class="form-group row">
             <label class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">D1:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-              <input type="number" min="0" max="100" step="1"   class="form-control" id="txtdiameter"  name="txtdiameter"  >
+              <input type="number" min="1" max="100" step="0"   class="form-control" id="txtdiameter"  name="txtdiameter"  >
             </div>
             <div class="col-sm-12 col-md-12 col-lg-3">
               <span class="p-2">0 </span>
@@ -50,7 +59,7 @@
             </div>
             <label class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Helix:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-              <select name="slchelix" class="form-select form-control" >
+              <select name="slchelix"id="slchelix" class="form-select form-control" >
                 <option value="" hidden selected>Open this select menu</option>
                 <option value="10">10</option>
                 <option value="15">15</option>
@@ -67,7 +76,7 @@
           <div class="form-group row">
             <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">D2:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-              <input type="number"  class="form-control" id="txtdiameter2" min="0" max="100" name="txtdiameter2"  >
+              <input type="number"  class="form-control" id="txtdiameter2" min="1" max="100" name="txtdiameter2"  >
             </div>
             <div class="col-sm-12 col-md-12 col-lg-3">
               <span class="p-2">0 </span>
@@ -92,7 +101,7 @@
           <div class="form-group row">
             <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">FL:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-              <input type="number"  class="form-control" id="txtfl" name="txtfl"  min="0" max="100" >
+              <input type="number"  class="form-control" id="txtfl" name="txtfl"  min="1" max="100" >
             </div>
             
             <div class="col-sm-12 col-md-12 col-lg-3">
@@ -123,7 +132,7 @@
           <div class="form-group row">
             <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">L:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-              <input type="number"  class="form-control" id="txtlength" name="txtlength" min="0" max="100" >
+              <input type="number"  class="form-control" id="txtlength" name="txtlength" min="1" max="100" >
             </div>
             <div class="col-sm-12 col-md-12 col-lg-3">
               <span class="p-2">0 </span>
@@ -142,6 +151,17 @@
           
 
           <div class="form-group row justify-content-end">
+          
+
+          <?php if ($numofteeth == true) { ?>
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Number of Teeth:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3">
+              <input type="number"  class="form-control" id="numofteeth" name="numofteeth"  min="1"  >
+            </div>
+          <?php } ?>
+
+      
+
             <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">Machine:</label>
               <div class="col-sm-12 col-md-12 col-lg-3">
 
@@ -150,14 +170,14 @@
                 <option value="NC Lathe">Nc Lathe</option>
                 <option value="Machinning Cuter">Machinning Cuter</option>
                 <option value="CNC Lathe">CNC Lathe</option>
-                <option value="Other">CrN</option>
+                <option value="Other">Other</option>
               </select>
 
             </div>
 
             <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">QUANTITY:</label>
-              <div class="col-sm-12 col-md-12 col-lg-3">
-                <input  type="number" class="form-control" id="txtqua" name="txtqua" >
+              <div class="col-sm-12 col-md-12 col-lg-2">
+                <input  type="number"  min="1"  class="form-control" id="txtqua" name="txtqua" >
             </div>
           </div>
 
@@ -227,7 +247,7 @@
 
                 <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">Tel:</label>
                 <div class="col-sm-12 col-md-12 col-lg-3">
-                  <input type="text"  class="form-control" id="txtcontact" name="txtcontact" required >
+                  <input type="text"  class="form-control" id="txtcontact" name="txtcontact"  >
                 </div>
         </div> 
 

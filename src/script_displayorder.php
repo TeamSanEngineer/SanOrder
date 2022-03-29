@@ -4,8 +4,8 @@ $(".loading").css("display","none")
 var userid = <?php echo "\"". $userid ."\"" ?>;
 var userlevel = <?php echo "\"". $userlevel ."\"" ?>;
 
-console.log(userid);
-console.log(userlevel);
+// console.log(userid);
+// console.log(userlevel);
 
 var table =  $('#example').DataTable(
        {
@@ -14,17 +14,13 @@ var table =  $('#example').DataTable(
           {'className': 'text-center', "data": 0 },
           {'className': 'text-center', "data": 1 },
           {'className': 'text-center', "data": 2 },
+          {'className': 'text-center', "data": 3 },
           {'className': 'text-center', 
             data: null,
             render: function ( data, type, row ) 
             {   
-                // if(userlevel == "admin")
-                // {
-                   
-                //   return '<button class="btn btn-primary " type="button" onclick="window.location=orderedit.php/id=2">EDIT</button>'
-                // }
-                // return data[1]
-                return '<button class="btn btn-primary " type="button" onclick="window.location=\'ordershow.php?id='+ data[1] +'\'">SHOW</button>'
+          
+                return '<button class="btn btn-primary " type="button" onclick="window.location=\'ordershow.php?type='+ data[3] +'&id='+ data[1] +'\'">SHOW</button>'
             }
           },
           {'className': 'text-center', 
@@ -33,11 +29,8 @@ var table =  $('#example').DataTable(
             {   
                 // if(userlevel == "admin")
                 // {
-                   
-                //   return '<button class="btn btn-primary " type="button" onclick="window.location=orderedit.php/id=2">EDIT</button>'
                 // }
-                // return data[1]
-                return '<button class="btn btn-danger " type="button" onclick="window.location=\'orderedit.php?id='+ data[1] +'\'">EDIT</button>'
+                return '<button class="btn btn-danger " type="button" onclick="window.location=\'orderedit.php?type='+ data[3] +'&id='+ data[1] +'\'">EDIT</button>'
             }
           },
         ],

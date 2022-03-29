@@ -2,7 +2,7 @@
 <html lang="en">
 <?php include 'header.php';?>
 <body>   
-<?php include 'body0_title.php';?> 
+<?php include 'body/body0_title.php';?> 
 <div style="height:50px ;">
  <center><a class="btn-dark btn-lg" href="index.php">Home</a></center>
 </div> 
@@ -22,7 +22,7 @@
   <div class="card">
     <div class="card-body" align="center">สำหรับสมาชิก</div>
     <form name="form1" method="post" action="checklogin.php">
-      <?php include 'body_login.php';?>  
+      <?php include 'body/body_login.php';?>  
     </from>
   </div>
 </div>

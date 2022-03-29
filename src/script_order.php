@@ -47,15 +47,12 @@
   });
 
 
-  console.log("<?php echo $userid ?>");
 
   var userid =  "<?php echo $userid ?>";
-  console.log(userid);
   if(userid != "")
   {
     $("#txtfname").attr("readonly", "true");
     $("#txtlname").attr("readonly", "true");
-    console.log("WOW");
     // $("#txtcontact").attr("required", "true");
   }
   
@@ -73,7 +70,6 @@
           if ($(this).val() > max)
           {
               $(this).val(max);
-              console.log( $( "#txtdiameter" ).val())
               $("#sld1SliderVal").text($(this).val());
               $('#sld1').slider('setValue', $(this).val());
 
@@ -81,14 +77,12 @@
           else if ($(this).val() < min)
           {
               $(this).val(min);
-              console.log( $( "#txtdiameter" ).val())
               $("#sld1SliderVal").text($(this).val());
               $('#sld1').slider('setValue', $(this).val());
           }    
           else if (min<$(this).val()<max)
           {
               $(this).val(Math.round($(this).val()));
-              console.log( $( "#txtdiameter" ).val())
               $("#sld1SliderVal").text($(this).val());
               $('#sld1').slider('setValue', $(this).val());
           }       
@@ -107,7 +101,6 @@
           if ($(this).val() > max)
           {
               $(this).val(max);
-              console.log( $( "#txtdiameter2" ).val())
               $("#sld2SliderVal").text($(this).val());
               $('#sld2').slider('setValue', $(this).val());
 
@@ -115,14 +108,12 @@
           else if ($(this).val() < min)
           {
               $(this).val(min);
-              console.log( $( "#txtdiameter2" ).val())
               $("#sld2SliderVal").text($(this).val());
               $('#sld2').slider('setValue', $(this).val());
           }    
           else if (min<$(this).val()<max)
           {
               $(this).val(Math.round($(this).val() / 10) * 10);
-              console.log( $( "#txtdiameter2" ).val())
               $("#sld2SliderVal").text($(this).val());
               $('#sld2').slider('setValue', $(this).val());
           }       
@@ -141,7 +132,6 @@
           if ($(this).val() > max)
           {
               $(this).val(max);
-              console.log( $( "#txtfl" ).val())
               $("#sld3SliderVal").text($(this).val());
               $('#sld3').slider('setValue', $(this).val());
 
@@ -149,14 +139,12 @@
           else if ($(this).val() < min)
           {
               $(this).val(min);
-              console.log( $( "#txtfl" ).val())
               $("#sld3SliderVal").text($(this).val());
               $('#sld3').slider('setValue', $(this).val());
           }    
           else if (min<$(this).val()<max)
           {
             $(this).val(Math.round($(this).val()));
-              console.log( $( "#txtfl" ).val())
               $("#sld3SliderVal").text($(this).val());
               $('#sld3').slider('setValue', $(this).val());
           }       
@@ -175,7 +163,6 @@
           if ($(this).val() > max)
           {
               $(this).val(max);
-              console.log( $( "#txtlength" ).val())
               $("#sld4SliderVal").text($(this).val());
               $('#sld4').slider('setValue', $(this).val());
 
@@ -183,14 +170,12 @@
           else if ($(this).val() < min)
           {
               $(this).val(min);
-              console.log( $( "#txtlength" ).val())
               $("#sld4SliderVal").text($(this).val());
               $('#sld4').slider('setValue', $(this).val());
           }    
           else if (min<$(this).val()<max)
           {
             $(this).val(Math.round($(this).val()));
-              console.log( $( "#txtlength" ).val())
               $("#sld4SliderVal").text($(this).val());
               $('#sld4').slider('setValue', $(this).val());
           }       
@@ -209,8 +194,6 @@ $("#fupload1").change(function () {
      fileSize = this.files[0];
      sizeInMb = fileSize.size;
      sizeLimit = 1024*1024*10;
-     console.log("FILE UPLOAD",sizeInMb)
-     console.log("FILE SIZE",sizeLimit)
     if (sizeInMb > sizeLimit)
      {
       alert("Max file size 10MB");
@@ -227,8 +210,6 @@ $("#fupload2").change(function () {
      fileSize = this.files[0];
      sizeInMb = fileSize.size;
      sizeLimit = 1024*1024*10;
-     console.log("FILE UPLOAD",sizeInMb)
-     console.log("FILE SIZE",sizeLimit)
     if (sizeInMb > sizeLimit)
      {
       alert("Max file size 10MB");
@@ -245,8 +226,6 @@ $("#fupload3").change(function () {
      fileSize = this.files[0];
      sizeInMb = fileSize.size;
      sizeLimit = 1024*1024*10;
-     console.log("FILE UPLOAD",sizeInMb)
-     console.log("FILE SIZE",sizeLimit)
     if (sizeInMb > sizeLimit)
      {
       alert("Max file size 10MB");
@@ -261,11 +240,40 @@ $("#fupload3").change(function () {
 
   $("#form1").submit(e => {
       e.preventDefault();
+
+      // if ($('#txtdiameter').val() == 0) {
+      //   Swal.fire({
+      //         icon: 'error',
+      //         title: 'Oops...',
+      //         text:  "Not must zero"  ,
+      //       })
+      //   return
+      // } 
+      // else {
+      //   // input is fine -- reset the error message
+      //   input.setCustomValidity('');
+      // }
+   
+     
+
+      // Swal.fire({
+      //   title: 'Do you want to save the changes?',
+      //   showDenyButton: true,
+      //   confirmButtonText: 'Save',
+      //   denyButtonText: `Don't save`,
+      //   }).then((result) =>
+      //    {
+      //     if (result.isConfirmed)
+      //     { 
+      //       $(".loading").css("display","block")
+      //       savedata()
+      //     } else if (result.isDenied) {
+      //     }
+      //   })
   });
 
   $( "#txtconfirm" ).click(function() {
     checkstate()
-    console.log()
     if(checkconfirm == true)
     {
       Swal.fire({
@@ -280,7 +288,6 @@ $("#fupload3").change(function () {
             $(".loading").css("display","block")
             savedata()
           } else if (result.isDenied) {
-            console.log("WWW");
           }
         })
     }
@@ -296,8 +303,10 @@ $("#fupload3").change(function () {
         function savedata(){
               var formData = new FormData(document.getElementById("form1"));
               formData.append("userid", <?php echo "\"".$userid."\""; ?>)
+              formData.append("sandatatype", <?php echo "\"".$sandatatype."\""; ?>)
+              
               $.ajax({
-              url: 'ajax_order.php',
+              url: 'api/ajax_order.php',
               type: "POST",
               cache: false,
               processData: false,
@@ -316,7 +325,7 @@ $("#fupload3").change(function () {
                         }).then(function() {
                           $(".loading").css("display","block")
                           window.location.href =  'index.php';
-                         // console.log(data);
+                          // console.log(data)
                         }); 
                 }
                 else{
@@ -342,8 +351,15 @@ $("#fupload3").change(function () {
                     } else {
                         console.log('Unknow Error.\n'+xhr.responseText);
                     }
+                    $(".loading").css("display","none")
+                      Swal.fire({
+                          icon: 'error',
+                          title: 'ERROR JSON',
+                          text: "Requested Error Status: "+xhr.status ,
+                        })
                   var errorMessage = xhr.status + ': ' + xhr.statusText;
-                  console.log(errorMessage);
+                  console.log(errorMessage)
+                  console.log(xhr.reason)
                 },
           });
         }
@@ -354,6 +370,45 @@ $("#fupload3").change(function () {
       function checkstate(){
         checkconfirm = true;
         txtconfirm = "";
+        if($('#txtdiameter').val() == "" || $('#txtdiameter').val() == 0 )
+        {
+          checkconfirm = false;
+          txtconfirm = "กรุณาป้อน D1 จำนวนเลขมากกว่า 0";
+          return
+        }
+        if($('#txtdiameter2').val() == "" || $('#txtdiameter2').val() == 0 )
+        {
+          checkconfirm = false;
+          txtconfirm = "กรุณาป้อน D2 จำนวนเลขมากกว่า 0";
+          return
+        }
+        if($('#txtfl').val() == "" || $('#txtfl').val() == 0 )
+        {
+          checkconfirm = false;
+          txtconfirm = "กรุณาป้อน FL จำนวนเลขมากกว่า 0";
+          return
+        }
+        if($('#txtlength').val() == "" || $('#txtlength').val() == 0 )
+        {
+          checkconfirm = false;
+          txtconfirm = "กรุณาป้อน L จำนวนเลขมากกว่า 0";
+          return
+        }
+
+        if($('#slchelix').val() == "" )
+        {
+          checkconfirm = false;
+          txtconfirm = "กรุณาเลือกค่า Helix ";
+          return
+        }
+
+
+
+
+
+
+
+
         if($('#txtfname').val() == "" )
         {
           checkconfirm = false;
@@ -364,6 +419,12 @@ $("#fupload3").change(function () {
         {
           checkconfirm = false;
           txtconfirm = "กรุณากรอกนามสกุล";
+          return
+        }
+        if($('#txtcontact').val() == "" )
+        {
+          checkconfirm = false;
+          txtconfirm = "กรุณาเบอร์โทรศัพท์";
           return
         }
       }

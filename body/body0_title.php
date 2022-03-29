@@ -11,7 +11,7 @@
             <a class="nav-link" href="/sanorder">Home <span class="sr-only">(current)</span></a>
           </li>
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Product
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -20,6 +20,9 @@
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="#">Something else here</a>
             </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" style="color:white" href="displayorder.php">Details </a>
           </li>
       </ul>
 
@@ -92,7 +95,7 @@
 
 <script>
  
- console.log( $(location).attr('href'));
+//  console.log( $(location).attr('href'));
 
  const parts = [{"text": 'Home', "link": '/'}];
 
@@ -103,35 +106,22 @@
     $( "#getbreadcrumb" ).append( '<li class="breadcrumb-item mycapitalize active" aria-current="page">Home</li>');
   }
   else{
-    // $( "#getbreadcrumb" ).append('<li class="breadcrumb-item"><a href="/sanorder">Products</a></li>');
     for (let i = 0; i < here.length; i++) {
       const part = here[i];
-      console.log(i)
-      console.log(part)
-      
-      // $( "#getbreadcrumb" ).append('<li class="breadcrumb-item"><a href="'+here[i]+'">Products</a></li>');
-      // if(i == 0 && here[1]=="" || here[1]=="index.php" )
-      // {
-      //   $( "#getbreadcrumb" ).append( '<li class="breadcrumb-item active" aria-current="page">Products A</li>');
-      //   console.log("I")
-      // }
-      // else if(i == 0 && here[1]!=""){
-      //   $( "#getbreadcrumb" ).append('<li class="breadcrumb-item"><a href="index.php">Products</a></li>');
-      //   console.log("A")
-      // }
-     
+      // console.log(i)
+      // console.log(part)
         var text = decodeURIComponent(part).split('.')[0];
-        console.log(text)
+        // console.log(text)
         if(i==0){
           text = "Home";
       }
         const link = '/' + here.slice(0, i + 1).join('/');
-        console.log(link)
+        // console.log(link)
         // parts.push({"text": text, "link": link});
         // console.log(parts)
         
         if (i === here.length - 1) {
-          console.log("last"+text+"  "+i)
+          // console.log("last"+text+"  "+i)
         }
         $( "#getbreadcrumb" ).append('<li class="breadcrumb-item mycapitalize"><a href="'+link+'">'+text+'</a></li>');
 

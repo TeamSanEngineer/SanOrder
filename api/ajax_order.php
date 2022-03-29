@@ -1,5 +1,5 @@
 <?php
-include("connectdb.php");
+include("../connectdb.php");
 $response =  array();
 $success = true;
 $reason = "";
@@ -21,30 +21,30 @@ try {
 	$d_frist=date('Y-m-d H:i:s', strtotime('+543 year'));
 
 	$sql = "INSERT INTO `san_order`(`orderid`,`diameter`,`diameter2`,`flength`,`length`,`helix`,`toolmaterial`,`coating`,`workmaterial`,`machine`,
-	`quality`,`description`,`denti`,`d_frist`,`userrecord`,`fristname`,`lastname`,`tel`,`fileupload1`,`fileupload2`,`fileupload3`) 
+	`quality`,`description`,`denti`,`d_frist`,`userrecord`,`fristname`,`lastname`,`tel`,`fileupload1`,`fileupload2`,`fileupload3`,`numteeth`,`status`,`type`) 
 	VALUES ('$orderid','".$_POST['txtdiameter']."','".$_POST['txtdiameter2']."'
 	,'".$_POST['txtfl']."','".$_POST['txtlength']."','".$_POST['slchelix']."','".$_POST['slctoolmaterial']."','".$_POST['slccoating']."','".$_POST['txtworkmaterial']."','".$_POST['slcmachine']."',
 	'".$_POST['txtqua']."','".$_POST['txtdes']."','".$_POST['txtden']."','$d_frist','".$_POST['userid']."','".$_POST['txtfname']."'
-    ,'".$_POST['txtlname']."','".$_POST['txtcontact']."','".$_FILES["fupload1"]["name"]."','".$_FILES["fupload2"]["name"]."','".$_FILES["fupload3"]["name"]."')";
+    ,'".$_POST['txtlname']."','".$_POST['txtcontact']."','".$_FILES["fupload1"]["name"]."','".$_FILES["fupload2"]["name"]."','".$_FILES["fupload3"]["name"]."','".$_POST['numofteeth']."','pending','".$_POST['sandatatype']."')";
 
 	if (mysqli_query($con, $sql))
 	 {
-        move_uploaded_file($_FILES["fupload1"]["tmp_name"],"doc/".$_FILES["fupload1"]["name"]);
-        move_uploaded_file($_FILES["fupload2"]["tmp_name"],"doc/".$_FILES["fupload2"]["name"]);
-        move_uploaded_file($_FILES["fupload3"]["tmp_name"],"doc/".$_FILES["fupload3"]["name"]);  	
+        move_uploaded_file($_FILES["fupload1"]["tmp_name"],"../doc/".$_FILES["fupload1"]["name"]);
+        move_uploaded_file($_FILES["fupload2"]["tmp_name"],"../doc/".$_FILES["fupload2"]["name"]);
+        move_uploaded_file($_FILES["fupload3"]["tmp_name"],"../doc/".$_FILES["fupload3"]["name"]);  	
 		$reason = "Data added successfully !";
 	} 
 	else
 	 {
 		$success = false;
-		$reason = "Error occured ! ";
+		$reason = "Error occured ! ". $mysqli -> error  . mysqli_error($con);
+		mysqli_rollback($con);
 	}
-
-
 	mysqli_close($con);
 
 } catch (Exception $ex) 
 {   
+	$success = false;
     $reason = $ex->getMessage();
 }
 
@@ -71,7 +71,8 @@ $response = array(
     'f1' => $_FILES["fupload1"]["name"],
     'f2' => $_FILES["fupload2"]["name"],
     'f3' => $_FILES["fupload3"]["name"],
-    'f4' =>$_FILES["fupload1"]["tmp_name"],"doc/".$_FILES["fupload1"]["name"],
+    'f4' =>$_FILES["fupload1"]["tmp_name"],"../doc/".$_FILES["fupload1"]["name"],
+	'sandatatype' => $_POST['sandatatype'],
     'reason' => $reason
 );
 
