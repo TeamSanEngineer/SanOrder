@@ -12,6 +12,8 @@
     <script src="js/moment.min.js"></script>
     <script src="js/font-awesome.js"></script>
     <script src="js/sweetalert2.js"></script>
+    <script src="js/aes.js"></script>
+    
 
     <link href="css/bootstrap-slider.min.css" rel="stylesheet"> 
     <script src="js/bootstrap-slider.min.js"></script>

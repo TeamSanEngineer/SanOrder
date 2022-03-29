@@ -1,6 +1,15 @@
 <script type="text/javascript">
 
   $(".loading").css("display","none")
+
+  var encryptedAES = CryptoJS.AES.encrypt("123456", "My Secret Passphrase");
+  var decryptedBytes = CryptoJS.AES.decrypt(encryptedAES, "My Secret Passphrase");
+  var plaintext = decryptedBytes.toString(CryptoJS.enc.Utf8);
+
+console.log(encryptedAES)
+console.log(decryptedBytes)
+console.log(encryptedAES)
+
   checkpass = false;
   $("#txtUsername").keyup(function(){
     checkpass = false;
@@ -114,11 +123,10 @@ $( "#checkusername" ).click(function() {
     return false
   }
   var formData = new FormData(document.getElementById("form1"));
-  console.log("A")
   $("#checkusername").prop("disabled", true);
   $(".loading").css("display","block")
   $.ajax({
-          url: 'ajax_checkuser.php',
+          url: 'api/ajax_checkuser.php',
           type: "POST",
           cache: false,
           processData: false,
@@ -185,9 +193,10 @@ $('#provinces').change(function() {
     var id_province = $(this).val();
       $.ajax({
       type: "POST",
-      url: "ajax_db.php",
+      url: "api/ajax_db.php",
       data: {id:id_province,function:'provinces'},
       success: function(data){
+          // console.log(data)
           $('#amphures').html(data); 
           $('#districts').html(' '); 
           $('#districts').val(' ');  
@@ -200,10 +209,11 @@ $('#amphures').change(function() {
     var id_amphures = $(this).val();
       $.ajax({
       type: "POST",
-      url: "ajax_db.php",
+      url: "api/ajax_db.php",
       data: {id:id_amphures,function:'amphures'},
       success: function(data){
           $('#districts').html(data);  
+          $('#zip_code').val(' '); 
       }
     });
 });
@@ -212,7 +222,7 @@ $('#districts').change(function(){
   var id_districts= $(this).val();
   $.ajax({
     type: "POST",
-    url: "ajax_db.php",
+    url: "api/ajax_db.php",
     data: {id:id_districts,function:'districts'},
     success: function(data){
        $('#zip_code').val(data)
@@ -224,13 +234,6 @@ $('#districts').change(function(){
 
 $("#form1").submit(e => {
     e.preventDefault()
-    console.log($('#provinces').val())
-    console.log($('#amphures').val())
-    console.log($('#districts').val())
-
-    console.log($('#provinces  option:selected').text())
-    console.log($('#amphures option:selected').text())
-    console.log($('#districts option:selected').text())
     if(checkpass == true)
     { 
         var formData = new FormData(document.getElementById("form1"));
@@ -253,25 +256,26 @@ $("#form1").submit(e => {
           { 
             $(".loading").css("display","block")
             $.ajax({
-                url: 'ajax_register.php',
+                url: 'api/ajax_register.php',
                 type: "POST",
                 cache: false,
                 processData: false,
                 contentType: false,
+                dataType: "json",
                 data: formData,
                 success: data => 
                 { 
-                    var response = JSON.parse(data);
-                    if (response['success'] == true)
+                    if (data.success == true)
                     {
                         $(".loading").css("display","none")
                         Swal.fire({
                           icon: 'success',
                           title: 'ยินดีด้วย',
-                          text: response['reason'],
+                          text: data.reason,
                         }).then(function() {
                           $(".loading").css("display","block")
                           window.location.href =  'login.php';
+                          console.log(data)
                         });  
                     }
                     else
@@ -279,13 +283,15 @@ $("#form1").submit(e => {
                         Swal.fire({
                           icon: 'error',
                           title: 'Oops...',
-                          text: response['reason'],
+                          text: data.reason,
                         })
-                        $(".loading").css("display","none")
+                        $(".loading").css("display","block")
+                        window.location.href =  'login.php';
                     }
                 },
                 error: (xhr, status, error) => {
                     var errorMessage = xhr.status + ': ' + xhr.statusText;
+                    $(".loading").css("display","none")
                     alert(errorMessage);
                     console.log(errorMessage);
                     $('#registersubmit').prop('disabled', false);

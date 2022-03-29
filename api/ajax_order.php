@@ -5,7 +5,7 @@ $success = true;
 $reason = "";
 
 try {
-	$query= "SELECT MAX(rowid) as lastid FROM san_order";
+	$query= "SELECT MAX(rowid) as lastid FROM a_san_order";
 	$result = mysqli_query($con,$query);
 	$objResult = mysqli_fetch_array($result);
 
@@ -20,7 +20,7 @@ try {
 	$orderid = "san-" . str_pad( $lastid, 4, '0', STR_PAD_LEFT);
 	$d_frist=date('Y-m-d H:i:s', strtotime('+543 year'));
 
-	$sql = "INSERT INTO `san_order`(`orderid`,`diameter`,`diameter2`,`flength`,`length`,`helix`,`toolmaterial`,`coating`,`workmaterial`,`machine`,
+	$sql = "INSERT INTO `a_san_order`(`orderid`,`diameter`,`diameter2`,`flength`,`length`,`helix`,`toolmaterial`,`coating`,`workmaterial`,`machine`,
 	`quality`,`description`,`denti`,`d_frist`,`userrecord`,`fristname`,`lastname`,`tel`,`fileupload1`,`fileupload2`,`fileupload3`,`numteeth`,`status`,`type`) 
 	VALUES ('$orderid','".$_POST['txtdiameter']."','".$_POST['txtdiameter2']."'
 	,'".$_POST['txtfl']."','".$_POST['txtlength']."','".$_POST['slchelix']."','".$_POST['slctoolmaterial']."','".$_POST['slccoating']."','".$_POST['txtworkmaterial']."','".$_POST['slcmachine']."',

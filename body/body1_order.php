@@ -88,7 +88,7 @@
             </div>
             <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Tool Material:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-              <select name="slctoolmaterial" class="form-select form-control" >
+              <select name="slctoolmaterial" id="slctoolmaterial" class="form-select form-control" >
                 <option value="" hidden selected>Open this select menu</option>
                 <option value="Carbide">Carbide</option>
                 <option value="HSS">HSS</option>
@@ -115,7 +115,7 @@
 
             <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Coating Type:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-              <select name="slccoating" class="form-select form-control" >
+              <select name="slccoating" id="slccoating" class="form-select form-control" >
                 <option value="" hidden selected>Open this select menu</option>
                 <option value="TIN">TIN</option>
                 <option value="TICN">TICN</option>
@@ -145,7 +145,7 @@
 
             <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Work Material:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-              <input type="text"  class="form-control" id="txtworkmtl" name="txtworkmaterial" >
+              <input type="text"  class="form-control" id="txtworkmaterial" name="txtworkmaterial" >
             </div>
           </div>
           
@@ -165,7 +165,7 @@
             <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">Machine:</label>
               <div class="col-sm-12 col-md-12 col-lg-3">
 
-              <select name="slcmachine" class="form-select form-control" >
+              <select name="slcmachine" id="slcmachine" class="form-select form-control" >
                 <option value="" hidden selected>Open this select menu</option>
                 <option value="NC Lathe">Nc Lathe</option>
                 <option value="Machinning Cuter">Machinning Cuter</option>
@@ -191,7 +191,7 @@
                 <span  id="txtfupload1" class="form-control"></span>
                 <span class="input-group-btn">
                   <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
-                  <input  name="fupload1" id="fupload1" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file">
+                  <input  name="fupload1" id="fupload1"  accept="application/pdf" style="display: none;" type="file">
                 </span>
               </div>
             </div>
@@ -205,7 +205,7 @@
                 <span  id="txtfupload2" class="form-control"></span>
                 <span class="input-group-btn">
                   <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
-                  <input name="fupload2" id="fupload2" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file">
+                  <input name="fupload2" id="fupload2"  accept="application/pdf" style="display: none;" type="file">
                 </span>
               </div>
             </div>
@@ -219,7 +219,7 @@
                 <span  id="txtfupload3" class="form-control"></span>
                 <span class="input-group-btn">
                   <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
-                  <input name="fupload3" id="fupload3" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file">
+                  <input name="fupload3" id="fupload3"  accept="application/pdf" style="display: none;" type="file">
                 </span>
               </div>
             </div>

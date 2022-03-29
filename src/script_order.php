@@ -188,88 +188,101 @@
 var fileSize;
 var sizeInMb;
 var sizeLimit;
+var ext1;
+var ext2;
+var ext3;
 // var max_file = 5 * 1024 * 1024; // 5MB
 
 $("#fupload1").change(function () {
      fileSize = this.files[0];
      sizeInMb = fileSize.size;
      sizeLimit = 1024*1024*10;
-    if (sizeInMb > sizeLimit)
-     {
-      alert("Max file size 10MB");
-      $('#txtfupload1').html('');
-      $(this).val('');
-    }
-    else
-    {
-      $('#txtfupload1').html($(this).val().split(/[\\|/]/).pop());
-    }
+     ext1 = $( this ).val().split('.').pop();
+     
+     if(ext1=="pdf"){
+          if (sizeInMb > sizeLimit)
+            {
+              Swal.fire({
+                          icon: 'error',
+                          title: 'FILE UPLOAD',
+                          text: 'Max file size 10MB' ,
+                        })
+              $('#txtfupload1').html('');
+              $(this).val('');
+            }
+            else
+            {
+              $('#txtfupload1').html($(this).val().split(/[\\|/]/).pop());
+            }
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'FILE UPLOAD',
+            text: 'Upload only pdf' ,
+          })
+        }
 });
 
 $("#fupload2").change(function () {
      fileSize = this.files[0];
      sizeInMb = fileSize.size;
      sizeLimit = 1024*1024*10;
-    if (sizeInMb > sizeLimit)
-     {
-      alert("Max file size 10MB");
-      $('#txtfupload2').html('');
-      $(this).val('');
-    }
-    else
-    {
-      $('#txtfupload2').html($(this).val().split(/[\\|/]/).pop());
-    }
+     ext2 = $( this ).val().split('.').pop();
+     if(ext2=="pdf"){
+          if (sizeInMb > sizeLimit)
+            {
+              Swal.fire({
+                          icon: 'error',
+                          title: 'FILE UPLOAD',
+                          text: 'Max file size 10MB' ,
+                        })
+              $('#txtfupload2').html('');
+              $(this).val('');
+            }
+            else
+            {
+              $('#txtfupload2').html($(this).val().split(/[\\|/]/).pop());
+            }
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'FILE UPLOAD',
+            text: 'Upload only pdf' ,
+          })
+        }
 });
 
 $("#fupload3").change(function () {
      fileSize = this.files[0];
      sizeInMb = fileSize.size;
      sizeLimit = 1024*1024*10;
-    if (sizeInMb > sizeLimit)
-     {
-      alert("Max file size 10MB");
-      $('#txtfupload3').html('');
-      $(this).val('');
-    }
-    else
-    {
-      $('#txtfupload3').html($(this).val().split(/[\\|/]/).pop());
-    }
+     ext3 = $( this ).val().split('.').pop();
+     if(ext3 == "pdf"){
+          if (sizeInMb > sizeLimit)
+            {
+              Swal.fire({
+                          icon: 'error',
+                          title: 'FILE UPLOAD',
+                          text: 'Max file size 10MB' ,
+                        })
+              $('#txtfupload3').html('');
+              $(this).val('');
+            }
+            else
+            {
+              $('#txtfupload3').html($(this).val().split(/[\\|/]/).pop());
+            }
+        }else{
+          Swal.fire({
+            icon: 'error',
+            title: 'FILE UPLOAD',
+            text: 'Upload only pdf' ,
+          })
+        }
 });
 
   $("#form1").submit(e => {
       e.preventDefault();
-
-      // if ($('#txtdiameter').val() == 0) {
-      //   Swal.fire({
-      //         icon: 'error',
-      //         title: 'Oops...',
-      //         text:  "Not must zero"  ,
-      //       })
-      //   return
-      // } 
-      // else {
-      //   // input is fine -- reset the error message
-      //   input.setCustomValidity('');
-      // }
-   
-     
-
-      // Swal.fire({
-      //   title: 'Do you want to save the changes?',
-      //   showDenyButton: true,
-      //   confirmButtonText: 'Save',
-      //   denyButtonText: `Don't save`,
-      //   }).then((result) =>
-      //    {
-      //     if (result.isConfirmed)
-      //     { 
-      //       $(".loading").css("display","block")
-      //       savedata()
-      //     } else if (result.isDenied) {
-      //     }
-      //   })
   });
 
   $( "#txtconfirm" ).click(function() {
@@ -370,47 +383,82 @@ $("#fupload3").change(function () {
       function checkstate(){
         checkconfirm = true;
         txtconfirm = "";
-        if($('#txtdiameter').val() == "" || $('#txtdiameter').val() == 0 )
-        {
+        if($('#txtdiameter').val() == "" || $('#txtdiameter').val() == 0 ){
           checkconfirm = false;
           txtconfirm = "กรุณาป้อน D1 จำนวนเลขมากกว่า 0";
+          $( "#txtdiameter" ).focus();
           return
         }
-        if($('#txtdiameter2').val() == "" || $('#txtdiameter2').val() == 0 )
-        {
+        if($('#txtdiameter2').val() == "" || $('#txtdiameter2').val() == 0 ){
           checkconfirm = false;
           txtconfirm = "กรุณาป้อน D2 จำนวนเลขมากกว่า 0";
+          $( "#txtdiameter2" ).focus();
           return
         }
-        if($('#txtfl').val() == "" || $('#txtfl').val() == 0 )
-        {
+        if($('#txtfl').val() == "" || $('#txtfl').val() == 0 ){
           checkconfirm = false;
           txtconfirm = "กรุณาป้อน FL จำนวนเลขมากกว่า 0";
+          $( "#txtfl" ).focus();
           return
         }
-        if($('#txtlength').val() == "" || $('#txtlength').val() == 0 )
-        {
+        if($('#txtlength').val() == "" || $('#txtlength').val() == 0 ){
           checkconfirm = false;
           txtconfirm = "กรุณาป้อน L จำนวนเลขมากกว่า 0";
+          $( "#txtlength" ).focus();
           return
         }
 
-        if($('#slchelix').val() == "" )
-        {
+        if($('#slchelix').val() == "" ){
           checkconfirm = false;
           txtconfirm = "กรุณาเลือกค่า Helix ";
+           $( "#slchelix" ).focus();
+          return
+        }
+
+        if($('#slctoolmaterial').val() == "" ){
+          checkconfirm = false;
+          txtconfirm = "กรุณาเลือกค่า Tool Material ";
+           $( "#slctoolmaterial" ).focus();
+          return
+        }
+
+        if($('#slccoating').val() == "" ){
+          checkconfirm = false;
+          txtconfirm = "กรุณาเลือกค่า Coating Type ";
+           $( "#slccoating" ).focus();
+          return
+        }
+
+        if($('#txtworkmaterial').val() == "" ){
+          checkconfirm = false;
+          txtconfirm = "กรุณาป้อน Work Material ";
+          $( "#txtworkmaterial" ).focus();
+          return
+        }
+
+        if($('#numofteeth').val() == "" ){
+          checkconfirm = false;
+          txtconfirm = "กรุณาป้อน Number of Teeth ";
+          $( "#numofteeth" ).focus();
+          return
+        }
+
+        if($('#slcmachine').val() == "" ){
+          checkconfirm = false;
+          txtconfirm = "กรุณาเลือกค่า Machine ";
+           $( "#slcmachine" ).focus();
+          return
+        }
+
+        if($('#txtqua').val() == "" ){
+          checkconfirm = false;
+          txtconfirm = "กรุณาป้อน QUANTITY ";
+          $( "#txtqua" ).focus();
           return
         }
 
 
-
-
-
-
-
-
-        if($('#txtfname').val() == "" )
-        {
+        if($('#txtfname').val() == "" ){
           checkconfirm = false;
           txtconfirm = "กรุณากรอกชื่อ";
           return

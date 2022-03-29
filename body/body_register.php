@@ -1,5 +1,5 @@
 <?php
-    $sql_provinces = "SELECT * FROM provinces ORDER BY name_th ASC";
+    $sql_provinces = "SELECT * FROM a_provinces ORDER BY name_th ASC";
     $query = mysqli_query($con, $sql_provinces);
 ?>
 
@@ -23,15 +23,14 @@
         <tr>
           <td colspan="2" align="right" style="text-align: center">
               <button type="button" id="checkusername" class="btn btn-primary btn-sm">ตรวจสอบ</button>
-			  <!-- <a href="" class="btn btn-danger btn-sm" role="button" onClick="checkusername();" > ตรวจสอบ </a>  -->
 		  </td>
         </tr>
-        <tr>
+        <!-- <tr>
             <td align="right">เลขบัตรประชาชน&nbsp;</td>
             <td><input type="text" name="txtcid" id="txtcid" pattern="[0-9]{13}" value="" maxlength="13" required>
                 <span class="error"></span>
             </td>
-        </tr>
+        </tr> -->
         <tr>
             <td align="right">คำนำหน้า&nbsp;</td>
             <td><input name="txtprefix" type="text"  id="txtprefix" value="" size="20" required></td>
@@ -60,8 +59,8 @@
                 ปี</td>
         </tr>
         <tr>
-            <td align="right">ชื่อหน่วยงาน</td>
-            <td><input name="txtorganizationname" type="text" id="txtorganizationname" value="" size="40"></td>
+            <td align="right">ชื่อบริษัท</td>
+            <td><input name="txtcompanyname" type="text" id="txtcompanyname" value="" size="40"></td>
         </tr>
         <tr>
             <td align="right"> ตำแหน่ง</td>
@@ -116,11 +115,10 @@
 </table>
 <br>
 <div  align="center">
-<!-- <a href="ready.php" class="btn btn-primary btn-sm" role="button"> Save </a>&nbsp;&nbsp; -->
         <button type="submit" id="registersubmit" class="btn btn-primary btn-sm">Save</button>
                 <a href="" class="btn btn-primary btn-sm" role="button"> Clear </a>
 </div>
 <br>
 </form>
-<?php include('script_register.php');?>
+<?php include('src/script_register.php');?>
 

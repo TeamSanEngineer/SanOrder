@@ -5,6 +5,13 @@
     $numofteeth = false;
    
        
+    if (isset($_SESSION["UserID"]))
+    { 
+      $userid =  $_SESSION["UserID"];
+    }
+
+ 
+
     $sql = "SELECT
     orderid,
     diameter,
@@ -25,9 +32,10 @@
     fileupload2,
     fileupload3,
     type,
-    numteeth
+    numteeth,
+    userrecord
     FROM
-    san_order
+    a_san_order
     WHERE orderid = '".$_GET['id']."' AND type = '".$_GET['type']."' ";
 
     $SelectResult = mysqli_query($con, $sql);
@@ -54,6 +62,7 @@
         $fupload3 = $row['fileupload3'];
         $sandatatype = $row['type'];
         $numteeth = $row['numteeth']; 
+        $userrecord =  $row['userrecord']; 
 
         if( $sandatatype == "drill")
         {
@@ -75,15 +84,20 @@
     }
 
     mysqli_close($con);
-    
-    
-    if (isset($_SESSION["UserID"]))
-    { 
-      $userid =  $_SESSION["UserID"];
-      // $fristname = $_SESSION["Fristname"];
-      // $lastname = $_SESSION["Lastname"];
+
+    if ($_SESSION["Level"] != 'admin'){     
+        if( $userrecord != $userid )
+        {
+          http_response_code(404);
+          include('notyou.php'); 
+          die();
+        }
     }
+    
+
+  
 ?>
+
 <div class="loading">Loading&#8230;</div>
 <form  id="form1" name="form1" method="post" >
 <section>
@@ -181,8 +195,10 @@
               <div class="input-group">
                 <span  id="txtfupload1" class="form-control ronly"><?php echo $fupload1; ?></span>
                 <span class="input-group-btn">
-                  <button type="button" class="btn btn-primary">Download</button>
-                  <!-- <input  readonly name="fupload1" id="fupload1" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file"> -->
+                  <?php if($fupload1 != "") {?>
+                        <button id="btndownload1" type="button" class="btn btn-primary" onclick="document.getElementById('linkdownload1').click()"><i class="fa fa-download"></i>Download</button>
+                        <a id="linkdownload1" href="doc/<?php echo $fupload1; ?>" download hidden></a>
+                    <?php } ?>
                 </span>
               </div>
             </div>
@@ -195,8 +211,10 @@
               <div class="input-group">
                 <span  id="txtfupload2" class="form-control ronly"><?php echo $fupload2; ?></span>
                 <span class="input-group-btn">
-                  <!-- <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span> -->
-                  <!-- <input  readonly  name="fupload2" id="fupload2" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file"> -->
+                  <?php if($fupload2 != "") {?>
+                      <button id="btndownload2" type="button" class="btn btn-primary" onclick="document.getElementById('linkdownload2').click()"><i class="fa fa-download"></i>Download</button>
+                      <a id="linkdownload2" href="doc/<?php echo $fupload2; ?>" download hidden></a>
+                  <?php } ?>
                 </span>
               </div>
             </div>
@@ -209,8 +227,10 @@
               <div class="input-group">
                 <span  id="txtfupload3" class="form-control ronly"><?php echo $fupload3; ?></span>
                 <span class="input-group-btn">
-                  <!-- <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span> -->
-                  <!-- <input  readonly  name="fupload3" id="fupload3" accept=".doc,.docx,application/pdf,.csv, application/vnd.openxmlformats-officedocument.spreadsheetml.sheet, application/vnd.ms-excel,image/png, image/jpeg" style="display: none;" type="file" > -->
+                  <?php if($fupload3 != "") {?>
+                      <button id="btndownload3" type="button" class="btn btn-primary" onclick="document.getElementById('linkdownload3').click()"><i class="fa fa-download"></i>Download</button>
+                      <a id="linkdownload3" href="doc/<?php echo $fupload3; ?>" download hidden></a>
+                  <?php } ?>
                 </span>
               </div>
             </div>

@@ -39,24 +39,24 @@ $userlevel = "";
 
                 if($userlevel == "admin")
                 {
-                  $sql = "SELECT * FROM san_order";
+                  $sql = "SELECT * FROM a_san_order";
                 }
                 else{
                   $sql = "SELECT
-                  san_order.orderid,
-                  san_order.fileupload1,
-                  san_order.d_update,
-                  san_order.diameter,
-                  san_order.fristname,
-                  san_order.lastname,
-                  san_order.type,
-                  `user`.userid,
-                  `user`.fristname,
-                  `user`.lastname,
-                  san_order.userrecord
+                  a_san_order.orderid,
+                  a_san_order.fileupload1,
+                  a_san_order.d_update,
+                  a_san_order.diameter,
+                  a_san_order.fristname,
+                  a_san_order.lastname,
+                  a_san_order.type,
+                  a_san_order.userrecord,
+                  a_user.userid,
+                  a_user.fristname,
+                  a_user.lastname
                   FROM
-                  `user`
-                  INNER JOIN san_order ON san_order.userrecord = `user`.userid WHERE `user`.userid = '$userid';
+                  a_san_order
+                  INNER JOIN a_user ON a_san_order.userrecord = a_user.userid WHERE a_user.userid = '$userid';
                   ";
                 }
 

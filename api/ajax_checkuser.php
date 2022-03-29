@@ -1,5 +1,5 @@
 <?php
-include("connectdb.php");
+include "../connectdb.php";
 $response = array();
 $success = false;
 $reason = "";
@@ -11,8 +11,8 @@ try {
   
 
 
-    $sql="SELECT * FROM user Where userid='".$Username."' ";
-    // $result = mysqli_query($con,$sql);
+    $sql="SELECT * FROM a_user Where userid='".$Username."' ";
+ 
     if (mysqli_query($con, $sql)) 
     {
         if(mysqli_num_rows(mysqli_query($con,$sql))>=1)
