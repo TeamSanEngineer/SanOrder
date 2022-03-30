@@ -24,7 +24,12 @@
       $userid =  $_SESSION["UserID"];
       $fristname = $_SESSION["Fristname"];
       $lastname = $_SESSION["Lastname"];
+      
+      $queryuser = "SELECT * FROM a_user WHERE userid = '".$_SESSION["UserID"]."' ";
+      $resultuser = mysqli_query($con,$queryuser);
+      $row = mysqli_fetch_array($resultuser);
     }
+    
     
 
   
@@ -249,10 +254,63 @@
                 <div class="col-sm-12 col-md-12 col-lg-3">
                   <input type="text"  class="form-control" id="txtcontact" name="txtcontact"  >
                 </div>
-        </div> 
+         </div> 
+
+         <div class="form-group row">
+              <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">ชื่อบริษัท</label>
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                  <input type="text"  class="form-control" id="txtcompanyname" name="txtcompanyname" value="<?php echo $fristname; ?>"  >
+                </div>
+
+                <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">ที่อยู่</label>
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                  <input type="text"  class="form-control" id="txtlname" name="txtlname" value="<?php echo $lastname; ?>" >
+                </div>
+
+                <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">ถนน</label>
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                  <input type="text"  class="form-control" id="txtcontact" name="txtcontact"  >
+                </div>
+         </div> 
+
+         <div class="form-group row">
+              <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">จังหวัด</label>
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                  <input type="text"  class="form-control" id="txtcompanyname" name="txtcompanyname" value="<?php echo $fristname; ?>"  >
+                </div>
+
+                <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">อำเภอ/เขต</label>
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                  <input type="text"  class="form-control" id="txtlname" name="txtlname" value="<?php echo $lastname; ?>" >
+                </div>
+
+                <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">ตำบล</label>
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                  <input type="text"  class="form-control" id="txtcontact" name="txtcontact"  >
+                </div>
+         </div> 
+
+         
+         <div class="form-group row">
+              <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">จังหวัด</label>
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                  <input type="text"  class="form-control" id="txtcompanyname" name="txtcompanyname" value="<?php echo $fristname; ?>"  >
+                </div>
+
+                <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">อำเภอ/เขต</label>
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                  <input type="text"  class="form-control" id="txtlname" name="txtlname" value="<?php echo $lastname; ?>" >
+                </div>
+
+                <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">ตำบล</label>
+                <div class="col-sm-12 col-md-12 col-lg-3">
+                  <input type="text"  class="form-control" id="txtcontact" name="txtcontact"  >
+                </div>
+         </div> 
 
         <br>
 
+        <hr>
           <div class="form-group row">
                 <div class="col-sm-12 col-md-12 col-lg-2">
                   <p class="newline"><p>

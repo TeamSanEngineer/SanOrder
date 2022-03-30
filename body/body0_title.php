@@ -50,7 +50,7 @@
                     <!-- <a class="dropdown-item"  href="https://mypcu-data.net/academy/inputadmin/index.php" >สำหรับผู้ดูแลระบบ</a>  -->
                     <hr> 
                     <?php }?>
-                     <a class="dropdown-item"  href="../academy/editregister.php" >แก้ไขข้อมูล</a>
+                     <a class="dropdown-item"  href="../sanorder/editregister.php" >แก้ไขข้อมูล</a>
                     <!-- <a class="dropdown-item"  href="https://mypcu-data.net/academy/editregister.php" >แก้ไขข้อมูล</a>   -->
                     <hr> 
                     <a class="dropdown-item" href="../sanorder/logout.php">Log out</a>
