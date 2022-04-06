@@ -1,33 +1,102 @@
-<nav  class="navbar navbar-expand-lg navbar-dark bg-black">
-  <!-- <a class="navbar-brand"  style="color:white" >San Engineering</a> -->
-  <a  class="navbar-brand mb-0 h1"  style="color:white" >San Engineering</a>
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown">
-      <span class="navbar-toggler-icon"></span>
+<nav class="navbar navbar-expand-lg navbar-dark bg-black">
+<a class="navbar-brand" href="#">San Engineering</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo01" aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
   </button>
-  <div id="navbarNavDropdown" class="navbar-collapse collapse">
-      <ul class="navbar-nav mr-auto">
-          <!-- <li style="color:white" >Home</li> -->
-          <li class="nav-item active">
-            <a class="nav-link" href="/sanorder">Home <span class="sr-only">(current)</span></a>
+  <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
+    <!-- <a class="navbar-brand" href="#">San Engineering</a> -->
+    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+      </li>
+      <!-- <li class="nav-item">
+        <a class="nav-link" href="#">Link</a>
+      </li> -->
+      <!-- <li class="nav-item">
+        <a class="nav-link disabled" href="#">Disabled</a>
+      </li> -->
+   <li class="nav-item dropdown active">
+        <a class="nav-link dropdown-toggle"  id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Products
+        </a>
+        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+          <!-- <li><a class="dropdown-item" href="#">Action</a></li> -->
+          <!-- <li><a class="dropdown-item" href="#">Another action</a></li> -->
+          <a class="dropdown-item" href="order.php?type=drill">Drill</a>
+          <a class="dropdown-item" href="order.php?type=endmill">Endmill</a>
+          <a class="dropdown-item" href="order.php?type=bite">Bite</a>
+          <a class="dropdown-item" href="order.php?type=part">Part</a>
+          <a class="dropdown-item" href="order.php?type=reamer">Reamer</a>
+          <a class="dropdown-item" href="order.php?type=cutter">Cutter</a>
+          <a class="dropdown-item" href="order.php?type=insert">Insert</a>
+          <a class="dropdown-item" href="order.php?type=other">Other</a>
+          <!-- <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Drill</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Submenu action</a></li>
+              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
+            </ul>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" style="color:white" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Product
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+
+          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Endmill</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Submenu action</a></li>
+              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
+            </ul>
           </li>
-          <li class="nav-item">
+
+          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Bite</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Submenu action</a></li>
+              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
+            </ul>
+          </li>
+
+
+          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Part</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Submenu action</a></li>
+              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Reamer</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Submenu action</a></li>
+              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Cutter</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Submenu action</a></li>
+              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Insert</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Submenu action</a></li>
+              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
+            </ul>
+          </li>
+
+          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Other</a>
+            <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="#">Submenu action</a></li>
+              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
+            </ul>
+          </li> -->
+        </ul>
+      </li>
+
+      <li class="nav-item">
             <a class="nav-link" style="color:white" href="displayorder.php">Details </a>
           </li>
-      </ul>
+
+    </ul>
 
 
-      <ul class="navbar-nav">
+    <ul class="navbar-nav">
             <?php  if( !isset($_SESSION["UserID"]) ){ ?>
             <li class="nav-item">
                 <a class="nav-link" style="color:white" href="register.php">สมัครมาชิก</a>
@@ -46,7 +115,7 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">                      
                     <?php  if( $_SESSION["Level"] == 'admin'  ) { ?>
-                    <a class="dropdown-item"  href="../academy/superadmin/index.php" >สำหรับผู้ดูแลระบบ</a>
+                    <span class="dropdown-item"  >ผู้ดูแลระบบ</span>
                     <!-- <a class="dropdown-item"  href="https://mypcu-data.net/academy/inputadmin/index.php" >สำหรับผู้ดูแลระบบ</a>  -->
                     <hr> 
                     <?php }?>
@@ -59,7 +128,10 @@
                 </li>
             <?php }?>
         </ul>
-
+    <!-- <form class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form> -->
   </div>
 </nav>
 
@@ -95,6 +167,21 @@
 
 <script>
  
+ $('.dropdown-menu a.dropdown-toggle').on('click', function(e) {
+  if (!$(this).next().hasClass('show')) {
+    $(this).parents('.dropdown-menu').first().find('.show').removeClass("show");
+  }
+  var $subMenu = $(this).next(".dropdown-menu");
+  $subMenu.toggleClass('show');
+
+
+  $(this).parents('li.nav-item.dropdown.show').on('hidden.bs.dropdown', function(e) {
+    $('.dropdown-submenu .show').removeClass("show");
+  });
+
+
+  return false;
+});
 //  console.log( $(location).attr('href'));
 
  const parts = [{"text": 'Home', "link": '/'}];

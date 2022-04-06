@@ -1,5 +1,5 @@
 <?php
-include("connectdb.php");
+include("../connectdb.php");
 $response =  array();
 $success = true;
 $reason = "";
@@ -81,7 +81,7 @@ $response = array(
     'orderid' => $_POST['orderid'],
     'txtdiameter' => $_POST['txtdiameter'],
 	'txtdiameter2' => $_POST['txtdiameter2'],
-	'txtcl' => $_POST['txtcl'],
+	'txtfl' => $_POST['txtfl'],
 	'txtlength' => $_POST['txtlength'],
 	'txtqua' => $_POST['txtqua'],
 	'txtdes' => $_POST['txtdes'],
@@ -90,7 +90,7 @@ $response = array(
 	'slccoating' => $_POST['slccoating'],
 	'txtfname' => $_POST['txtfname'],
 	'txtlname' => $_POST['txtlname'],
-	'txtcontact' => $_POST['txtcontact'],
+	'txtphone' => $_POST['txtphone'],
 
 	'f1' => $_FILES["fupload1"]["name"],
 	'f2' => $_FILES["fupload2"]["name"],

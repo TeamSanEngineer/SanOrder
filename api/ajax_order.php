@@ -20,12 +20,26 @@ try {
 	$orderid = "san-" . str_pad( $lastid, 4, '0', STR_PAD_LEFT);
 	$d_frist=date('Y-m-d H:i:s', strtotime('+543 year'));
 
-	$sql = "INSERT INTO `a_san_order`(`orderid`,`diameter`,`diameter2`,`flength`,`length`,`helix`,`toolmaterial`,`coating`,`workmaterial`,`machine`,
-	`quality`,`description`,`denti`,`d_frist`,`userrecord`,`fristname`,`lastname`,`tel`,`fileupload1`,`fileupload2`,`fileupload3`,`numteeth`,`status`,`type`) 
-	VALUES ('$orderid','".$_POST['txtdiameter']."','".$_POST['txtdiameter2']."'
-	,'".$_POST['txtfl']."','".$_POST['txtlength']."','".$_POST['slchelix']."','".$_POST['slctoolmaterial']."','".$_POST['slccoating']."','".$_POST['txtworkmaterial']."','".$_POST['slcmachine']."',
+	$sql = "INSERT INTO `a_san_order`(`orderid`,`diameterhead`,`diameterbase`,`flength`,`length`,`helix`,`toolmaterial`,`coating`,`workmaterial`,`machine`,
+	`quality`,`description`,`denti`,`d_frist`,`userrecord`,`fristname`,`lastname`,`tel`,`fileupload1`,`fileupload2`,`fileupload3`,`numteeth`,`status`,`type`,
+	`companyname`,`address`,`road`,`tambon`,`amphur`,`province`,`postcode`,`email`,`destoolmaterial`,`descoating`,`desmachine`,`coolant`,`usdrillchk`,`usdrilltxt`,`usbrkchk`,`usbrkntchk`,`usbitechk`,`usbitetxt`,`usscoopchk`,
+	`usscooptxt`,`uslathechk`,`uslathetxt`,`usotherchk`,`usothertxt`,`coatingcolor`,`imgid`,`subid`,`radius`,`thread`,`lengthead`,`angle`,`clength`) 
+
+
+
+
+
+	VALUES ('$orderid','".$_POST['txtdiameterhead']."','".$_POST['txtdiameterbase']."'
+	,'".$_POST['txtflength']."','".$_POST['txtlength']."','".$_POST['slchelix']."','".$_POST['slctoolmaterial']."','".$_POST['slccoating']."','".$_POST['txtworkmaterial']."','".$_POST['slcmachine']."',
 	'".$_POST['txtqua']."','".$_POST['txtdes']."','".$_POST['txtden']."','$d_frist','".$_POST['userid']."','".$_POST['txtfname']."'
-    ,'".$_POST['txtlname']."','".$_POST['txtcontact']."','".$_FILES["fupload1"]["name"]."','".$_FILES["fupload2"]["name"]."','".$_FILES["fupload3"]["name"]."','".$_POST['numofteeth']."','pending','".$_POST['sandatatype']."')";
+    ,'".$_POST['txtlname']."','".$_POST['txtphone']."','".$_FILES["fupload1"]["name"]."','".$_FILES["fupload2"]["name"]."','".$_FILES["fupload3"]["name"]."','".$_POST['numofteeth']."','pending','".$_POST['sandatatype']."'
+	,'".$_POST['txtcompanyname']."','".$_POST['txtaddress']."','".$_POST['txtroad']."','".$_POST['txtdistricts']."','".$_POST['txtamphures']."','".$_POST['txtprovinces']."'
+	,'".$_POST['txtzipcode']."','".$_POST['txtemail']."','".$_POST['txttoolmaterial']."','".$_POST['txtcoating']."','".$_POST['txtmachine']."','".$_POST['slccoolant']."'
+	,'".$_POST['usdrillchk']."','".$_POST['txtusagedrill']."','".$_POST['usbrkchk']."','".$_POST['usbrkntchk']."'
+	,'".$_POST['usbitechk']."','".$_POST['txtusagebite']."','".$_POST['usscoopchk']."','".$_POST['txtusagescoop']."'
+	,'".$_POST['uslathechk']."','".$_POST['txtusagelathe']."','".$_POST['usotherchk']."','".$_POST['txtusageother']."'
+	,'".$_POST['txtcoatingcolor']."','".$_POST['imgid']."','".$_POST['subid']."','".$_POST['txtradius']."'
+	,'".$_POST['txtthread']."','".$_POST['txtlengthead']."','".$_POST['txtangle']."','".$_POST['txtclength']."')";
 
 	if (mysqli_query($con, $sql))
 	 {
@@ -50,23 +64,51 @@ try {
 
 $response = array(
 
-	'userid'  => $_POST['userid'],
-    'orderid' => $orderid,
     'success' => $success,
-    'txtdiameter' => $_POST['txtdiameter'],
-	'txtdiameter2' => $_POST['txtdiameter2'],
-	'txtcl' => $_POST['txtcl'],
-	'txtlength' => $_POST['txtlength'],
-	'txtqua' => $_POST['txtqua'],
-	'txtdes' => $_POST['txtdes'],
+	// ID
+	'00imgid'  => $_POST['imgid'],
+    '00subid' => $_POST['subid'],
+	
 
-	'selhelix' => $_POST['selhelix'],
+	//IMG 
+	'txtdiameterhead' => $_POST['txtdiameterhead'],
+	'txtdiameterbase' => $_POST['txtdiameterbase'],
+	//Measure
+    'txtdiameterhead' => $_POST['txtdiameterhead'],
+	'txtdiameterbase' => $_POST['txtdiameterbase'],
+	'txtclength' => $_POST['txtclength'],
+	'txtlength' => $_POST['txtlength'],
+	'txtlengthead' => $_POST['txtlengthead'],
+	'txtflength' => $_POST['txtflength'],
+	'txtradius' => $_POST['txtradius'],
+	'txtthread' => $_POST['txtthread'],
+	'txtangle' => $_POST['txtangle'],
+	'txtqua' => $_POST['txtqua'],
+
+	'slchelix' => $_POST['slchelix'],
 	'slctoolmaterial' => $_POST['slctoolmaterial'],
 	'slccoating' => $_POST['slccoating'],
-
+	'slcmachine' => $_POST['slcmachine'],
+	
 	'txtfname' => $_POST['txtfname'],
 	'txtlname' => $_POST['txtlname'],
-	'txtcontact' => $_POST['txtcontact'],
+	'txtphone' => $_POST['txtphone'],
+
+
+	'usdrillchk' => $_POST['usdrillchk'],
+	'usbrk' => $_POST['usbrkchk'],
+	'usbrknt' => $_POST['usbrkntchk'],
+	'usbitechk' => $_POST['usbitechk'],
+	'usscoop' => $_POST['usscoopchk'],
+	'uslathe' => $_POST['uslathechk'],
+	'usother' => $_POST['usotherchk'],
+	
+
+	'txtusagedrill' => $_POST['txtusagedrill'],
+	'txtusagebite' => $_POST['txtusagebite'],
+	'txtusagescoop' => $_POST['txtusagescoop'],
+	'txtusagelathe' => $_POST['txtusagelathe'],
+	'txtusageother' => $_POST['txtusageother'],
 
     'f1' => $_FILES["fupload1"]["name"],
     'f2' => $_FILES["fupload2"]["name"],
@@ -79,3 +121,5 @@ $response = array(
 echo json_encode($response);
 exit();
 ?>
+
+

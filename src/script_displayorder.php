@@ -35,33 +35,33 @@ var table =  $('#example').DataTable(
           },
         ],
         "scrollX": true,
-        "dom": 'Bfrtip',
+        "dom": 'frtip',
         // "order": [[ 0, "desc" ]],
-        "buttons": [
-                   {
-                        "extend": "csv",
-                        "text": "Export as CSV",
-                        "filename": "Report Name",
-                        "className": "btn btn-green",
-                        "charset": "utf-8",
-                        "bom": "true",
-                        init: function(api, node, config) {
-                            $(node).removeClass("btn-default");
-                        }
-                    },
-                    {
-                        "extend": "excel",
-                        "text": "Export as Excel",
-                        "filename": "Report Name",
-                        "className": "btn btn-green",
-                        "charset": "utf-8",
-                        "bom": "true",
-                        init: function(api, node, config) {
-                            $(node).removeClass("btn-default");
-                        }
-                    }
+        // "buttons": [
+        //            {
+        //                 "extend": "csv",
+        //                 "text": "Export as CSV",
+        //                 "filename": "Report Name",
+        //                 "className": "btn btn-green",
+        //                 "charset": "utf-8",
+        //                 "bom": "true",
+        //                 init: function(api, node, config) {
+        //                     $(node).removeClass("btn-default");
+        //                 }
+        //             },
+        //             {
+        //                 "extend": "excel",
+        //                 "text": "Export as Excel",
+        //                 "filename": "Report Name",
+        //                 "className": "btn btn-green",
+        //                 "charset": "utf-8",
+        //                 "bom": "true",
+        //                 init: function(api, node, config) {
+        //                     $(node).removeClass("btn-default");
+        //                 }
+        //             }
                  
-        ]       
+        // ]       
     } );
 
 
@@ -85,78 +85,5 @@ var table =  $('#example').DataTable(
         // alert( 'data = '+data[0]+ ' row' );
     } );
 
-    // $('#example').on('click', 'tbody .id', function () {
-    //     var data = table.row( this ).data();
-    //     alert( 'data = '+data[0]+ ' row' );
-    // } );
-
-    // $('#example').on('click', 'tbody .edit_btn', function () {
-    // var data_row = table.row($(this).closest('tr')).data();
-    //     $("#exampleModal").modal('show');
-    //     $('#exampleModal').on('shown.bs.modal', function()
-    //      {
-    //       $("#txthosteltake").prop('checked', check1);  
-    //       $("#txthosteladvance").prop('checked', check2); 
-    //       $("#txtnothostel").prop('checked', check3); 
-    
-    //     });
-
-    //  });
-
-//       $(".loading").css("display","block")
-//       $.ajax( {
-//         url: "ajax_edithotel.php",
-//         type: "POST",
-//         data:
-//         {
-//           urlid:urlid,
-//           useredit:useredit,
-//           onmemberedit:onmemberedit,
-//           hosteltake: datahosteltake,
-//           hosteladvance: datahosteladvance ,
-//           nothostel: datanothostel
-//         },
-//         success: function(data)
-//         {
-//           var response = JSON.parse(data);
-//                 $(".loading").css("display","none")
-//                 if (response['success'] ==  true) 
-//                 {
-                
-//                   Swal.fire({
-//                   icon: 'success',
-//                   title: 'ยินดีด้วย',
-//                   text: response['reason'],
-//                 }).then(function()
-//                 {
-//                   $(".loading").css("display","block")
-//                   location.reload();
-//                   console.log(response);
-//                 });
-//                 }
-//                 else{
-                  
-//                   Swal.fire({
-//                   icon: 'error',
-//                   title: 'Oops...',
-//                   text: response['reason'],
-//                 }).then(function()
-//                 {
-//                   $(".loading").css("display","block")
-//                   location.reload();
-//                   console.log(response);
-//                 });
-
-//                 }
-        
-//         },
-//         error: function(error) {
-//           alert("ERROR");
-//             $("#result").html(error);
-//             $(".loading").css("display","block")
-//         }
-//         });
-      
-//     });
 
 </script>

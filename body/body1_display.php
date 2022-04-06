@@ -16,9 +16,9 @@ $userlevel = "";
 
 <section>
       <div class="container">
-        <div class="d-flex justify-content-center" >
+        <!-- <div class="d-flex justify-content-center" >
           <button type="button" class="btn btn-secondary " id="txtback" onclick="window.location='index.php';" >HOME</button>
-        </div>
+        </div> -->
         <div class="d-flex justify-content-center"  >
 				<table id="example"  style="width:100%"  class="table display nowrap">
         <thead>
@@ -86,37 +86,4 @@ $userlevel = "";
 		
       </div>
 </section>
-
-    <section>
-    
-    <!-- Modal -->
-    <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">ต้องการที่พัก</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-        
-          <form>
-            <div class="form-group">
-              <label><input type="checkbox" name="txthosteltake" id="txthosteltake"> ต้องการให้จองที่พักให้</label><br>
-              <label><input type="checkbox" name="txthosteladvance"  id="txthosteladvance"> เข้าพักล่วงหน้า</label><br>
-              <label><input type="checkbox" name="txtnothostel"  id="txtnothostel"> ไม่ต้องการที่พัก</label>
-            </div>
-          </form>
-
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" id="savemember" class="btn btn-primary">Save</button>
-            <button type="button"  id="closemember" class="btn btn-secondary" data-dismiss="modal">Close</button>
-          </div>
-        </div>
-      </div>
-    </div> -->
-    
 </form>
