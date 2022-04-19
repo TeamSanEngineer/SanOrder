@@ -12,6 +12,12 @@ try {
     {
         $row = mysqli_fetch_assoc($result);
     }
+
+    $sql = "SELECT * FROM a_nteeth WHERE numofteethid = '".$row['numofteethid']."'  ";
+    $imgresult = mysqli_query($con, $sql);
+    foreach( $imgresult as $value ) {
+        $data[ $value['value']]  = $value['numofteethname'];
+     }
     mysqli_close($con);
 } catch (Exception $ex) 
 {   
@@ -30,7 +36,19 @@ $response = array(
     'lengthead' => $row['lengthead'] === 'true' ? true: false,	
     'flength' => $row['flength'] === 'true' ? true: false,		
     'angle' => $row['angle'] === 'true' ? true: false,		
-    // 'subid' => $_POST['idimg'],
+    'radiushead' => $row['radiushead'] === 'true' ? true: false,		
+    'helix' => $row['helix'] === 'true' ? true: false,		
+
+    'diameterhead2' => $row['diameterhead2']  === 'true' ? true: false, 	
+    'diameterbase2' => $row['diameterbase2']  === 'true' ? true: false,	
+    'lengthead2' => $row['lengthead2']  === 'true' ? true: false, 	
+    'radiushead2' => $row['radiushead2']  === 'true' ? true: false,	
+    'anglestep' => $row['anglestep']  === 'true' ? true: false,	
+
+
+    'numofteeth' => $row['numofteethchk'] === 'true' ? true: false,		
+    'numofteethid' => $row['numofteethid'],
+    'numofteethname' => $data,
     'reason' => $reason
 );
 

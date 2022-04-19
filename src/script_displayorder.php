@@ -15,22 +15,20 @@ var table =  $('#example').DataTable(
           {'className': 'text-center', "data": 1 },
           {'className': 'text-center', "data": 2 },
           {'className': 'text-center', "data": 3 },
+          {'className': 'text-center', "data": 4 },
           {'className': 'text-center', 
             data: null,
             render: function ( data, type, row ) 
             {   
-          
-                return '<button class="btn btn-primary " type="button" onclick="window.location=\'ordershow.php?type='+ data[3] +'&id='+ data[1] +'\'">SHOW</button>'
+              return '<a href="ordershow.php?type='+ data[3] +'&id='+ data[1]+'" class="btn btn-primary" role="button">See Detail</a>'
+                // return '<a class="btn btn-primary " role="button"  onclick="window.location=\'ordershow.php?type='+ data[3] +'&id='+ data[1] +'\'">SHOW</a>'
             }
           },
           {'className': 'text-center', 
             data: null,
             render: function ( data, type, row ) 
             {   
-                // if(userlevel == "admin")
-                // {
-                // }
-                return '<button class="btn btn-danger " type="button" onclick="window.location=\'orderedit.php?type='+ data[3] +'&id='+ data[1] +'\'">EDIT</button>'
+                return '<a href="orderedit.php?type='+ data[3] +'&id='+ data[1]+'" class="btn btn-danger" role="button">EDIT</a>'
             }
           },
         ],

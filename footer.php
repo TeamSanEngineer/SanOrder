@@ -1,15 +1,3 @@
-<!-- <footer class="footer">
-  <div>
-    <div>
-
-      <div>
-        <p>Copyright © SAN Co.,Ltd. All rights reserved.</p>
-      </div>
-
-    </div>
-  </div>
-</footer> -->
-
 <div class="footer-dark">
         <footer>
             <div class="container">
@@ -35,5 +23,3 @@
             </div>
         </footer>
     </div>
-
-    <!-- <script async defer crossorigin="anonymous" src="https://connect.facebook.net/th_TH/sdk.js#xfbml=1&version=v13.0" nonce="CAae6sQi"></script> -->

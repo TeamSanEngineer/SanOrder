@@ -5,7 +5,6 @@
     $reason = "";
     $name =  array();
     try {
-    	$reason = "lol";
         $sql = "SELECT
         a_image.imgid,
         a_measure.imgid,
@@ -29,6 +28,7 @@
         'success' => $success,
         'name' => $name,
         'subid' => $_POST['idimg'],
+        'checkshow' => $_POST['checkshow']  === 'true' ? true: false, 	
         'reason' => $reason
     );
 

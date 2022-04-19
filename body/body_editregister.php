@@ -10,13 +10,6 @@
 <form  id="form1" name="form1" method="post" >
 <table border="0" align="center" cellpadding="5" cellspacing="5">
     <tbody>
-      
-        <!-- <tr>
-            <td align="right">เลขบัตรประชาชน&nbsp;</td>
-            <td><input type="text" name="txtcid" id="txtcid" pattern="[0-9]{13}" value="<?php echo $row['cid'];?>" maxlength="13"  required>
-                <span class="error"></span>
-            </td>
-        </tr> -->
         <tr>
             <td align="right">คำนำหน้า&nbsp;</td>
             <td><input name="txtprefix" type="text"  id="txtprefix" value="<?php echo $row['prefix'];?>" size="20"  required></td>
@@ -101,7 +94,6 @@
 </table>
 <br>
 <div  align="center">
-<!-- <a href="ready.php" class="btn btn-primary btn-sm" role="button"> Save </a>&nbsp;&nbsp; -->
                 <button type="submit" id="registersubmit" class="btn btn-primary btn-sm">EDIT</button>
                 <a href="" class="btn btn-primary btn-sm" role="button"> Clear </a>
 </div>

@@ -1,63 +1,65 @@
 <?php
-    $userid = $userlevel = $fristname = $lastname =  "";
-    $diameter= $diameter2 = $clength = $length = $quality = $description = $tel = $denti = 0;
- 
-       
-    $sql = "SELECT *FROM a_san_order WHERE orderid = '".$_GET['id']."' AND type = '".$_GET['type']."' ";
-
+  
+    $disableimg = false;
+    $numofteeth = false;
+    if($_GET['type'] == "drill") {
+      $sanimg = "drill.png";
+      $sanhome = "drill.jpg";
+    }
+    elseif($_GET['type'] == "endmill" ){
+      $sanimg = "endmill.png";
+      $sanhome = "endmill.jpg";
+    }
+    elseif($_GET['type'] == "bite" ){
+      $sanimg = "bite.png";
+      $sanhome = "bite.png";
+    }
+    elseif($_GET['type'] == "part" ){
+      $sanimg = "part.png";
+      $sanhome = "part.jpg";
+    }
+    elseif($_GET['type'] == "reamer" ){
+      $sanimg = "reamer.png";
+      $sanhome = "reamer.png";
+    }
+    elseif($_GET['type'] == "cutter" ) {
+      $sanimg = "cutter.png";
+      $sanhome = "cutter.jpg";
+    }
+    elseif($_GET['type'] == "insert" ){
+      $sanimg = "insert.png";
+      $sanhome = "insert.jpg";
+    }
+    elseif($_GET['type'] == "other" ){
+      // $sanimg = "other.png";
+      // $sanhome = "other.jpg";
+      $sanimg = "drill.png";
+      $sanhome = "drill.jpg";
+    }
+    else{
+        http_response_code(404);
+        include('my_404.php'); 
+        die();
+    }
+    $userid = $userlevel = $fristname = $lastname = "";
+    if (isset($_SESSION["UserID"]))
+    { 
+      $userid =  $_SESSION["UserID"];
+    }
+    
+    $sql = "SELECT * FROM a_san_order WHERE orderid = '".$_GET['id']."' AND type = '".$_GET['type']."' ";
     $SelectResult = mysqli_query($con, $sql);
+
     if(mysqli_num_rows($SelectResult) == 1)
     {
-      $row = mysqli_fetch_assoc($SelectResult);
-      $sandatatype = $row['type'];
-      if($sandatatype == "drill") {
-        $sanimg = "drill.png";
-        $sanhome = "drill.jpg";
-      }
-      elseif($sandatatype == "endmill" ){
-        $sanimg = "endmill.png";
-        $sanhome = "endmill.jpg";
-        $numofteeth = true;
-      }
-      elseif($sandatatype == "bite" ){
-        $sanimg = "bite.png";
-        $numofteeth = true;
-      }
-      elseif($sandatatype == "part" ){
-        $sanimg = "part.png";
-        $numofteeth = true;
-      }
-      elseif($sandatatype == "reamer" ){
-        $sanimg = "reamer.png";
-        $numofteeth = true;
-      }
-      elseif($sandatatype == "cutter" ) {
-        $sanimg = "cutter.png";
-        $numofteeth = true;
-      }
-      elseif($sandatatype == "insert" ){
-        $sanimg = "insert.png";
-        $numofteeth = true;
-      }
-      elseif($sandatatype == "other" ){
-        $sanimg = "other.png";
-        $numofteeth = true;
-      }
-    } 
+        $row = mysqli_fetch_assoc($SelectResult);
+    }
     else{
       http_response_code(404);
       include('my_404.php'); 
       die();
     }
-    // mysqli_close($con);
-  
-    
-    if (isset($_SESSION["UserID"]))
-    { 
-      $userid =  $_SESSION["UserID"];
-    }
 
-    
     if ($_SESSION["Level"] != 'admin'){     
       if( $row['userrecord'] != $userid )
       {
@@ -67,82 +69,246 @@
       }
   }
   
+    
+   
 ?>
 <div class="loading">Loading&#8230;</div>
 <form  id="form1" name="form1" method="post" >
 <section>
       <div class="container">
-                    <div class="text-center">
-                      <img src="images/home/<?php echo $sanhome  ?>" class="rounded" >
-                    </div>
+          <div class="text-center">
+             <img src="images/home/<?php echo $sanhome  ?>" class="rounded img-fluid border border-dark" >
+          </div>
 
-                  <div class="d-flex justify-content-center" >
-                    <p>
-                      <h2>
-                          <?php 
-                            if($sandatatype == "other")
-                            {
-                              echo "Special Cutting Tool";
-                            }else{
-                              echo strtoupper($sandatatype);
-                            }
-                          ?>
-                    </h2>
-                    </p>
-                  </div>
+          
+         <div class="d-flex justify-content-center" >
+          <p>
+            <h2>
+                 <?php 
+                  if($_GET['type'] == "other")
+                  {
+                    echo "Special Cutting Tool";
+                  }else{
+                     echo strtoupper($_GET['type']);
+                  }
+                 ?>
+           </h2>
+          </p>
+        </div>
+          
+  
 
-       
-          <div id="listsubtype" class="list-group list-group-horizontal text-nowrap overflow-auto">
-                  <?php 
-                      $phpArray = array();
+        <div id="listsubtype" class="list-group list-group-horizontal text-nowrap overflow-auto">
+                <?php 
                       $sql = "SELECT * FROM a_image WHERE type = '".$_GET['type']."' ORDER BY `order` ASC;";
                       $result = mysqli_query($con, $sql);
-
-                      $imgcurrent = "";
                    if ($result->num_rows > 0) {
                         $x = 1 ;
                   while($rowimg = $result->fetch_assoc()) {
-                        $new = array_push($phpArray, $rowimg["getimg"]);
-                      if($row['imageorder'] == $rowimg["order"]){
-                        $imgcurrent = $rowimg["getimg"];
-                        ?> 
-
-                       <a class="list-group-item list-group-item-action text-center active" data-toggle="list" onClick="imagedraw(<?php echo $rowimg["order"];?>)" >
-                        <img src="images/mattype/<?php echo $rowimg["name"]; ?>" class="rounded"   >
-                       </a>
-                      
-                  <?php }else{ ?>
+                    if($row['imgid'] == $rowimg["imgid"])
+                    {
+                      $disableimg= $rowimg["disable"] === 'true' ? true: false;
+                      ?> 
                         
-                          <a class="list-group-item list-group-item-action text-center " data-toggle="list" onClick="imagedraw(<?php echo $rowimg["order"];?>)" >
-                            <img src="images/mattype/<?php echo $rowimg["name"]; ?>" class="rounded"   >
-                          </a>
+                       <figure class="list-group-item list-group-item-action text-center active"  data-toggle="list" >
+                              <img src="images/mattype/<?php echo $rowimg["name"]; ?>" alt="x" >
+                              <figcaption><?php echo $rowimg["description"]; ?></figcaption>
+                          </figure>
+                      <?php }else{ ?>
+                      <figure class="list-group-item list-group-item-action text-center disabled"  data-toggle="list" >
+                              <img src="images/mattype/<?php echo $rowimg["name"]; ?>" alt="x" >
+                              <figcaption><?php echo $rowimg["description"]; ?></figcaption>
+                          </figure>
                       <?php 
-                          }
+                      }
                         $x++;
                         }
                   }
-                  mysqli_close($con);
                   ?>
-          </div>
-                  
-          <div  id="imgdraw" class="text-center">
-                  <br>
-                  <img src="images/datatype/<?php echo $imgcurrent;  ?>" class="rounded img-fluid border border-dark" >
-          </div>
-          <br>
+        </div>
+        <?php 
+            $sql = "SELECT * FROM a_measure WHERE imgid = '".$row['imgid']."' AND subid = '".$row['subid']."' ";
+            $resultsubimg = mysqli_query($con, $sql);
+        
+            if(mysqli_num_rows($resultsubimg) == 1)
+            {
+                $rowsubimg = mysqli_fetch_assoc($resultsubimg);
+                $diameterhead      = $rowsubimg['diameterhead'] ;
+                $diameterbase      = $rowsubimg['diameterbase'] ;
+                $radius            = $rowsubimg['radius'] ;
+                $thread            = $rowsubimg['thread'] ;
+                $clength           = $rowsubimg['clength'] ;
+                $length            = $rowsubimg['length'] ;
+                $lengthead         = $rowsubimg['lengthead'] ;
+                $flength           = $rowsubimg['flength'] ;
+                $angle             = $rowsubimg['angle'] ;
+                $radiushead        = $rowsubimg['radiushead'] ;
+                $numofteethchk     = $rowsubimg['numofteethchk'] ;
+                $helix             = $rowsubimg['helix'] ;
 
-          <div class="form-group row">
-            <label class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">D1:</label>
-            <div class="col-sm-12 col-md-12 col-lg-4 input-group">
-              <input type="number" min="0" max="100"   class="form-control" id="txtdiameter"  name="txtdiameter" value="<?php echo  $row['diameter']; ?>"  >
-              <div class="input-group-append">
-                <span class="input-group-text" >mm.</span>
-              </div>
-              <label class="col-form-label padlabelL" >min-max (0-100) </label>
+                $diameterhead2        = $rowsubimg['diameterhead2'] ;
+                $diameterbase2        = $rowsubimg['diameterbase2'] ;
+                $lengthead2        = $rowsubimg['lengthead2'] ;
+                $radiushead2        = $rowsubimg['radiushead2'] ;
+                $anglestep        = $rowsubimg['anglestep'] ;
+
+                $imgehomemain = $rowsubimg["namemeasure"];
+            }
+            // mysqli_close($con);
+         ?>
+        <br>
+          <div  id="imgdraw" class="row">
+            
+          </div>
+
+        
+        <!-- <br> -->
+        <hr class="imgmain">
+
+        <div class="row imgmain"  >
+            <div class="col-sm-12 col-md-12 col-lg-12 text-center " id="imgmain" >
+              <!-- <img  src="images/datatype/ballendmill.png" class="rounded  img-fluid  img-thumbnail"  > -->
+              <img src="images/datatype/<?php echo $imgehomemain; ?>" class="rounded  img-fluid  img-thumbnail border "  >
             </div>
-          
-            <label class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">HELIX:</label>
-            <div class="col-sm-12 col-md-12 col-lg-3">
+
+            <div class="col-sm-12 col-md-12 col-lg-12 ">
+              <!-- <button type="button" id="btnimg" class="btn btn-primary">กลับ</button> -->
+            </div>
+        </div>          
+        <hr class="imgmain">
+        
+        <!-- BODY START -->
+      <div id="content">
+
+
+      <div id="measure">
+        <div class="form-group row" >
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label ">Measure:</label> 
+        </div>
+        <div  class="form-group row mx-md-n5 gethidden" >
+            <label class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 diameterhead">d1:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 diameterhead">
+              <input type="number" min="0" max="100"   class="form-control" id="txtdiameterhead"  name="txtdiameterhead"  value="<?php echo $row['diameterhead']; ?>" >
+              <div class="input-group-append ">
+                <span class="input-group-text  form-control">mm.</span>
+              </div>
+            </div>
+
+            <label class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 diameterhead2">d2:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 diameterhead2">
+              <input  type="number" min="0" max="100"   class="form-control" id="txtdiameterhead2"  name="txtdiameterhead2" value="<?php echo $row['diameterhead2']; ?>"  >
+              <div class="input-group-append ">
+                <span class="input-group-text  form-control ">mm.</span>
+              </div>
+            </div>
+            
+            
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 diameterbase">D1:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 diameterbase">
+              <input type="number"  class="form-control" id="txtdiameterbase" min="0" max="100" name="txtdiameterbase" value="<?php echo $row['diameterbase']; ?>" >
+              <div class="input-group-append">
+                <span class="input-group-text  form-control " >mm.</span>
+              </div>
+            </div>
+
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 diameterbase2">D2:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 diameterbase2">
+              <input  type="number"  class="form-control" id="txtdiameterbase2" min="0" max="100" name="txtdiameterbase2"  value="<?php echo $row['diameterbase2']; ?>"  >
+              <div class="input-group-append">
+                <span class="input-group-text  form-control " >mm.</span>
+              </div>
+            </div>
+
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 clength">C.L.:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 clength">
+              <input type="number"  class="form-control" id="txtclength" name="txtclength"  min="0" max="160" value="<?php echo $row['clength']; ?>" value="<?php echo $row['flength']; ?>" >
+              <div class="input-group-append">
+                <span class="input-group-text  form-control " >mm.</span>
+              </div>
+            </div>     
+
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 flength">F.L.:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 flength">
+              <input type="number"  class="form-control" id="txtflength" name="txtflength"  min="0" max="160" value="<?php echo $row['flength']; ?>" >
+              <div class="input-group-append">
+                <span class="input-group-text  form-control ">mm.</span>
+              </div>
+            </div>     
+            
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 length">L:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 length">
+              <input type="number"  class="form-control" id="txtlength" name="txtlength" min="0" max="300" value="<?php echo $row['length']; ?>">
+              <div class="input-group-append">
+                <span class="input-group-text  form-control " >mm.</span>
+              </div>
+            </div>
+
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 lengthead">L1:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 lengthead">
+              <input type="number"  class="form-control" id="txtlengthead" name="txtlengthead" min="0" max="300" value="<?php echo $row['lengthead']; ?>" >
+              <div class="input-group-append">
+                <span class="input-group-text  form-control " >mm.</span>
+              </div>
+            </div>
+            
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 lengthead2">L2:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 lengthead2">
+              <input  type="number"  class="form-control" id="txtlengthead2" name="txtlengthead2" min="0" max="300" value="<?php echo $row['lengthead2']; ?>" >
+              <div class="input-group-append">
+                <span class="input-group-text  form-control " >mm.</span>
+              </div>
+            </div>
+
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 radius">R:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 radius">
+              <input type="number"  class="form-control" id="txtradius" name="txtradius" min="0" max="300" value="<?php echo $row['radius']; ?>">
+              <div class="input-group-append">
+                <span class="input-group-text  form-control " >mm.</span>
+              </div>
+            </div>
+
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 radiushead">R1:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 radiushead">
+              <input type="number"  class="form-control" id="txtradiushead" name="txtradiushead" min="0" max="300" value="<?php echo $row['radiushead']; ?>" >
+              <div class="input-group-append">
+                <span class="input-group-text  form-control " >mm.</span>
+              </div>
+            </div>
+
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 radiushead2">R2:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 radiushead2">
+              <input  type="number"  class="form-control" id="txtradiushead2" name="txtradiushead2" min="0" max="300" value="<?php echo $row['radiushead2']; ?>"  >
+              <div class="input-group-append">
+                <span class="input-group-text  form-control " >mm.</span>
+              </div>
+            </div>
+            
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 thread" >Tr:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 thread">
+              <input type="number"  class="form-control" id="txtthread" name="txtthread" min="0" max="300" value="<?php echo $row['thread']; ?>"  >
+              <div class="input-group-append">
+                <span class="input-group-text  form-control " >mm.</span>
+              </div>
+            </div>
+
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 angle">Angle:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 angle">
+              <input type="number"  class="form-control" id="txtangle" name="txtangle" min="0" max="60"   value="<?php echo $row['angle']; ?>">
+              <div class="input-group-append">
+                <span class="input-group-text  form-control " >°</span>
+              </div>
+            </div>
+            
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 anglestep">Angle Step:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 anglestep">
+              <input  type="number"  class="form-control" id="txtanglestep" name="txtanglestep" min="0" max="60" value="<?php echo $row['anglestep']; ?>" >
+              <div class="input-group-append">
+                <span class="input-group-text  form-control" >°</span>
+              </div>
+            </div>
+
+            <label class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 helix">HELIX:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 mb-3 helix">
               <select id="slchelix" name="slchelix" class="form-select form-control" >
               <option value="" hidden selected>Open this select menu</option>
                 <option value="10°">10°</option>
@@ -154,19 +320,43 @@
                 <option value="45°">45°</option>
                 <option value="60°">60°</option>
               </select>
-            </div>
-          </div>
-
-          <div class="form-group row">
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">D2:</label>
-            <div class="col-sm-12 col-md-12 col-lg-4 input-group">
-              <input type="number"  class="form-control" id="txtdiameter2" min="0" max="100" name="txtdiameter2" value="<?php echo  $row['diameter2']; ?>"  >
-              <div class="input-group-append">
-                <span class="input-group-text" >mm.</span>
               </div>
-              <label class="col-form-label padlabelL" >min-max (0-100) </label>
+            
+            
+        </div>
+        <hr>
+        <div class="form-group row">
+              <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright pt-3 numofteeth">Number of Teeth:</label>
+              <div class="col-sm-12 col-md-12 col-lg-1 pt-2 numofteeth">
+                <input type="number"  class="form-control" id="numofteeth" name="numofteeth"  min="1" max="8" value="<?php echo $row['numteeth']; ?>" >
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-9 numofteeth">
+                  <div id="numteethimg" class="form-group row">
+                  <?php 
+                      $sql = "SELECT * FROM a_nteeth WHERE numofteethid = '".$row['imgid'].$row['subid']."' ";
+                      $result = mysqli_query($con, $sql);
+                        if ($result->num_rows > 0) {
+                              $x = 1 ;
+                        while($rownum= $result->fetch_assoc()) {
+                            ?> 
+                              <div class="col-sm-12 col-md-12 col-lg-4 imgdraw mb-3"><img src="images/teeth/<?php echo $rownum['numofteethname']; ?>" class="rounded  img-fluid  img-thumbnail border " onclick="checkimage('<?php echo $rownum['value']; ?>')"  ></div>
+                            <?php 
+                              $x++;
+                              }
+                        }
+                      ?>
+                  </div>
             </div>
-            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">MATERIAL:</label>
+         </div>
+        <hr class="numofteeth">
+      </div>           
+
+
+        <div class="form-group row">
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label ">คุณสมบัติ:</label> 
+        </div>
+        <div class="form-group row">
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">MATERIAL:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
               <select id="slctoolmaterial" name="slctoolmaterial" class="form-select form-control" >
                 <option value="" hidden selected>Select menu</option>
@@ -178,19 +368,8 @@
               </select>
               <input type="text"  class="form-control" id="txttoolmaterial" name="txttoolmaterial" style="display:none;" value="<?php echo $row['destoolmaterial']; ?>" >
             </div>
-          </div>
 
-          <div class="form-group row">
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">FL:</label>
-
-            <div class="col-sm-12 col-md-12 col-lg-4 input-group">
-              <input type="number"  class="form-control" id="txtfl" name="txtfl"  min="0" max="160" value="<?php echo  $row['flength']; ?>">
-              <div class="input-group-append">
-                <span class="input-group-text" >mm.</span>
-              </div>
-              <label class="col-form-label padlabelL" >min-max (0-160) </label>
-            </div>              
-            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">COATING:</label>
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">COATING:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
               <select id="slccoating" name="slccoating" class="form-select form-control" >
               <option value="" hidden selected>Select menu</option>
@@ -206,99 +385,42 @@
               </select>
               <input type="text"  class="form-control" id="txtcoating" name="txtcoating" style="display:none;" value="<?php echo $row['descoating']; ?>"  >
             </div>
-          </div>
-          
-          <div class="form-group row">
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">L:</label>
-            <div class="col-sm-12 col-md-12 col-lg-4 input-group">
-              <input type="number"  class="form-control" id="txtlength" name="txtlength" min="0" max="300"  value="<?php echo  $row['length']; ?>">
-              <div class="input-group-append">
-                <span class="input-group-text" >mm.</span>
-              </div>
-              <label class="col-form-label padlabelLG" >min-max (0-300) </label>
-            </div>
-           
             <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Coating Color:</label>
-            <div class="col-sm-12 col-md-12 col-lg-3">
-                  <input  type="text"  class="form-control" id="txtcoatingcolor" name="txtcoatingcolor" value="<?php echo $row['coatingcolor']; ?>"   >
+            <div class="col-sm-12 col-md-12 col-lg-2">
+                <input type="text"  class="form-control" id="txtcoatingcolor" name="txtcoatingcolor" value="<?php echo $row['coatingcolor']; ?>"   >
             </div>
-    
-            
-          </div>
-        
-        
-
-          <br>
-
-      
-          <!-- <br> -->
-          <div class="form-group row">
-            <?php if ($numofteeth == true) { ?>
-              <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Number of Teeth:</label>
-              <div class="col-sm-12 col-md-12 col-lg-1">
-                <input type="number"  class="form-control" id="numofteeth" name="numofteeth"  min="1" max="8" value="<?php echo $row['numteeth'];  ?>" >
-              </div>
-              <div class="col-sm-12 col-md-12 col-lg-9">
-                  <div class="form-group row">
-                      <div class="col-sm-12 col-md-12 col-lg-2">
-                        <img id="imageId1" class="img-thumbnail" src="images/40x40.png">
-                      </div>
-                      <div class="col-sm-12 col-md-12 col-lg-2">
-                        <img id="imageId2" class="img-thumbnail" src="images/40x40.png">
-                      </div>
-                      <div class="col-sm-12 col-md-12 col-lg-2">
-                        <img id="imageId3"  class="img-thumbnail" src="images/40x40.png">
-                      </div>
-                      <div class="col-sm-12 col-md-12 col-lg-2">
-                        <img id="imageId4" class="img-thumbnail"  src="images/40x40.png">
-                      </div>
-                      <div class="col-sm-12 col-md-12 col-lg-2">
-                        <img id="imageId5" class="img-thumbnail"  src="images/40x40.png">
-                      </div>
-                      <div class="col-sm-12 col-md-12 col-lg-2">
-                        <img id="imageId6" class="img-thumbnail" src="images/40x40.png">
-                      </div>
-                  </div>
-              </div>
-            <?php } ?>
-          
-          </div>
-
-        
-
-
-          <div class="form-group row justify-content-end">
-
-          <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Work Material:</label>
+        </div>
+          <!-- <hr> -->
+          <div class="form-group row ">
+               <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">Work Material:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
-            <input   type="text"  class="form-control" id="txtworkmaterial"  name="txtworkmaterial" value="<?php echo  $row['workmaterial']; ?>"  >
+              <input type="text"  class="form-control" id="txtworkmaterial" name="txtworkmaterial" value="<?php echo $row['workmaterial']; ?>"  >
             </div>
-
             <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">Machine:</label>
               <div class="col-sm-12 col-md-12 col-lg-3">
-                <select name="slcmachine" id="slcmachine" class="form-select form-control" require>
-                  <option value="" hidden selected>Open this select menu</option>
-                  <option value="NC Lathe">Nc Lathe</option>
-                  <option value="Machinning Cuter">Machinning Cuter</option>
-                  <option value="CNC Lathe">CNC Lathe</option>
-                  <option value="Other">Other</option>
-                </select>
-                <input type="text"  class="form-control" id="txtmachine" name="txtmachine"  style="display:none;" value="<?php echo $row['desmachine']; ?>" > 
-              </div>
+              <select name="slcmachine" id="slcmachine" class="form-select form-control" >
+                <option value="" hidden selected>Select menu</option>
+                <option value="NC Lathe">NC Lathe</option>
+                <option value="Machinning Center">Machinning Center</option>
+                <option value="CNC Lathe">CNC Lathe</option>
+                <option value="Other">Other</option>
+              </select>
+              <input type="text"  class="form-control" id="txtmachine" name="txtmachine"  style="display:none;" value="<?php echo $row['desmachine']; ?>">
+            </div>
 
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">QUANTITY:</label>
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">QUANTITY:</label>
               <div class="col-sm-12 col-md-12 col-lg-2">
-                <input type="number" class="form-control" id="txtqua" name="txtqua" value=<?php echo $row['quality']; ?>  >
+                <input  type="number"  min="1"  class="form-control" id="txtquality" name="txtquality" value="<?php echo $row['quality']; ?>" >
             </div>
           </div>
-          
+          <!-- <br> -->
+          <hr>
           <div class="form-group row">
             <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label ">ลักษณะการใช้งาน:</label> 
           </div>
-
-          <div class="form-group row align-items-center">
+        <div class="form-group row align-items-center">
             <div class="col-sm-12 col-md-12 col-lg-3 padt">
-              <div class="form-check mb-2 ">
+              <div class="form-check mb-3 ">
                 <input class="form-check-input" type="checkbox" id="chkusagedrill" >
                 <label class="form-check-label" for="chkusagedrill">
                   เจาะ ความลึกเจาะ:
@@ -306,7 +428,7 @@
               </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-3">
-                <input  type="text"   class="form-control" id="txtusagedrill" name="txtusagedrill"  value="<?php echo $row['usdrilltxt']; ?>">
+                <input  type="text"   class="form-control" id="txtusagedrill" name="txtusagedrill" readonly value="<?php echo $row['usdrilltxt']; ?>">
             </div>
 
             <div class="col-sm-12 col-md-12 col-lg-1 "></div>
@@ -323,7 +445,7 @@
             <div class="col-sm-12 col-md-12 col-lg-2">
                <p class="newline"><p>
               <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" name="chkusagebreak" id="chkusagentbreak" >
+                <input class="form-check-input" type="checkbox" name="chkusagebreak" id="chkusagentbreak" value="false">
                 <label class="form-check-label" for="chkusagentbreak">
                   ไม่ทะลุ
                 </label>
@@ -334,21 +456,21 @@
           <div class="form-group row align-items-center">
             <div class="col-sm-12 col-md-12 col-lg-3 padt">
               <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" id="chkusagebite" >
+                <input class="form-check-input" type="checkbox" id="chkusagebite">
                 <label class="form-check-label" for="chkusagebite">
                   กัด ความลึกกัดด้านข้าง:
                 </label>
               </div>
             </div>         
             <div class="col-sm-12 col-md-12 col-lg-3">
-                <input  type="text"   class="form-control" id="txtusagebite" name="txtusagebite"  value="<?php echo $row['usbitetxt']; ?>">
+                <input  type="text"   class="form-control" id="txtusagebite" name="txtusagebite" readonly value="<?php echo $row['usbitetxt']; ?>">
             </div>
 
             <div class="col-sm-12 col-md-12 col-lg-1 "></div>
             <div class="col-sm-12 col-md-12 col-lg-2">
                <p class="newline"><p>
               <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" id="chkusagescoop" >
+                <input class="form-check-input" type="checkbox" id="chkusagescoop">
                 <label class="form-check-label" for="chkusagescoop">
                    คว้าน ความลึกคว้าน:
                 </label>
@@ -356,7 +478,7 @@
             </div>
 
             <div class="col-sm-12 col-md-12 col-lg-3">
-                <input  type="text"   class="form-control" id="txtusagescoop" name="txtusagescoop"  value="<?php echo $row['usscooptxt']; ?>">
+                <input  type="text"   class="form-control" id="txtusagescoop" name="txtusagescoop" readonly readonly value="<?php echo $row['usscooptxt']; ?>">
             </div>
           </div>
 
@@ -364,40 +486,53 @@
           <div class="form-group row align-items-center">
             <div class="col-sm-12 col-md-12 col-lg-3 padt">
               <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" id="chkusagelathe" >
+                <input class="form-check-input" type="checkbox" id="chkusagelathe">
                 <label class="form-check-label" for="chkusagelathe">
                   กลึง ความลึกกลึง:
                 </label>
               </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-3">
-                <input  type="text"   class="form-control" id="txtusagelathe" name="txtusagelathe"  value="<?php echo $row['uslathetxt']; ?>">
+                <input  type="text"   class="form-control" id="txtusagelathe" name="txtusagelathe" readonly value="<?php echo $row['uslathetxt']; ?>">
             </div>
             <div class="col-sm-12 col-md-12 col-lg-1 "></div>
             <div class="col-sm-12 col-md-12 col-lg-2">
                <p class="newline"><p>
               <div class="form-check mb-2">
-                <input class="form-check-input" type="checkbox" id="chkusageother" >
+                <input class="form-check-input" type="checkbox" id="chkusageother">
                 <label class="form-check-label" for="chkusageother">
                    อื่นๆ:
                 </label>
               </div>
             </div>
             <div class="col-sm-12 col-md-12 col-lg-3">
-                <input  type="text"   class="form-control" id="txtusageother" name="txtusageother" value="<?php echo $row['usothertxt']; ?>" >
+                <input  type="text"   class="form-control" id="txtusageother" name="txtusageother" readonly value="<?php echo $row['usothertxt']; ?>">
             </div>
           </div>
 
-          <br>
+          <!-- <br> -->
+          <div class="form-group row">
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label">ลักษณะการจ่ายหล่อเย็น:</label>
+              <div class="col-sm-12 col-md-12 col-lg-2">
+                <select name="slccoolant" id="slccoolant" class="form-select form-control" >
+                  <option value="เจาะแห้ง"  selected>เจาะแห้ง</option>
+                  <option value="จ่ายภายนอก">จ่ายภายนอก</option>
+                  <option value="จ่ายภายใน">จ่ายภายใน</option>
+                </select>
+            </div>
+          </div>
 
+
+          <hr>
           <div class="form-group row">
             <label class="col-form-label">Drawing Attach File 1:</label>
             <div class="col-sm-12 col-md-12 col-lg-5">
               <div class="input-group">
-                <span   id="txtfupload1" class="form-control"><?php echo $row['fileupload1']; ?></span>
+                <span  id="txtfupload1" class="form-control"><?php echo $row['fileupload1'];?></span>
                 <span class="input-group-btn">
                   <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
-                  <input  name="fupload1" id="fupload1" accept=".jpg,.png,.doc,.docx,application/pdf,.sldprt ,.sldasm ,.slddrw ,.slddrt" style="display: none;" type="file">
+                  <input  name="fupload1" id="fupload1"  accept=".jpg,.png,.doc,.docx,application/pdf,.sldprt ,.sldasm ,.slddrw ,.slddrt" style="display: none;"   type="file">
+                  <button class="btn btn-primary" onclick='uploadrest(1)' >Reset</button>
                 </span>
               </div>
             </div>
@@ -408,37 +543,32 @@
             <label class="col-form-label">Drawing Attach File 2:</label>
             <div class="col-sm-12 col-md-12 col-lg-5">
               <div class="input-group">
-                <span  id="txtfupload2" class="form-control"><?php echo $row['fileupload2']; ?></span>
+                <span  id="txtfupload2" class="form-control"><?php echo $row['fileupload2'];?></span>
                 <span class="input-group-btn">
                   <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
-                  <input  name="fupload2" id="fupload2" accept=".jpg,.png,.doc,.docx,application/pdf,.sldprt ,.sldasm ,.slddrw ,.slddrt" style="display: none;" type="file">
+                  <input name="fupload2" id="fupload2"  accept=".jpg,.png,.doc,.docx,application/pdf,.sldprt ,.sldasm ,.slddrw ,.slddrt" style="display: none;"  type="file">
+                  <button class="btn btn-primary" onclick='uploadrest(2)' >Reset</button>
                 </span>
               </div>
             </div>
           </div>
-
-
           <div class="form-group row">
             <label class="col-form-label">Drawing Attach File 3:</label>
             <div class="col-sm-12 col-md-12 col-lg-5">
               <div class="input-group">
-                <span  id="txtfupload3" class="form-control"><?php echo $row['fileupload3']; ?></span>
+                <span  id="txtfupload3" class="form-control"><?php echo $row['fileupload3'];?></span>
                 <span class="input-group-btn">
                   <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
-                  <input  name="fupload3" id="fupload3" accept=".jpg,.png,.doc,.docx,application/pdf,.sldprt ,.sldasm ,.slddrw ,.slddrt" style="display: none;" type="file" >
+                  <input name="fupload3" id="fupload3"  accept=".jpg,.png,.doc,.docx,application/pdf,.sldprt ,.sldasm ,.slddrw ,.slddrt" style="display: none;"  type="file">
+                  <button class="btn btn-primary" onclick='uploadrest(3)' >Reset</button>
                 </span>
               </div>
             </div>
           </div>
-
-
-
-
         <div class="form-group">
           <label for="description">More Description</label>
-          <textarea class="form-control rounded-0" id="txtdes" name="txtdes" rows="5"  ><?php echo $row['description']; ?></textarea>
+          <textarea class="form-control rounded-0" id="txtdes" name="txtdes" rows="5"><?php echo $row['description'];?></textarea>
         </div>
-
         <br>
         <div class="form-group row">
               <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">ชื่อ:</label>
@@ -508,21 +638,26 @@
 
 
         <hr>
-
           <div class="form-group row">
                 <div class="col-sm-12 col-md-12 col-lg-2">
                   <p class="newline"><p>
                   <button type="button" class="btn btn-primary " id="txtconfirm">Confirm</button>
                 </div> 
+                  
+                <div class="col-sm-12 col-md-12 col-lg-2">
+                  <p class="newline"><p>
+                  <button type="button" class="btn btn-danger " id="txtreject">Reject</button>
+                </div> 
 
                 <div class="col-sm-12 col-md-12 col-lg-2">
                   <p class="newline"><p>
-                  <button type="button" class="btn btn-danger " id="txtback" onclick="window.location='index.php';" >Back</button>
+                  <button type="button" class="btn btn-info " id="txtback" onclick="window.location='index.php';" >Back Home</button>
                 </div> 
         </div> 
-
-        <!-- END -->
+         <!-- BODY END -->
       </div>
+        <!-- END -->
+    </div>
       
 </section>
 </form>

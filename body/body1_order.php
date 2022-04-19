@@ -9,36 +9,32 @@
     elseif($_GET['type'] == "endmill" ){
       $sanimg = "endmill.png";
       $sanhome = "endmill.jpg";
-      $numofteeth = true;
     }
     elseif($_GET['type'] == "bite" ){
       $sanimg = "bite.png";
       $sanhome = "bite.png";
-      $numofteeth = true;
     }
     elseif($_GET['type'] == "part" ){
       $sanimg = "part.png";
       $sanhome = "part.jpg";
-      $numofteeth = true;
     }
     elseif($_GET['type'] == "reamer" ){
       $sanimg = "reamer.png";
-      $numofteeth = true;
+      $sanhome = "reamer.png";
     }
     elseif($_GET['type'] == "cutter" ) {
       $sanimg = "cutter.png";
       $sanhome = "cutter.jpg";
-      $numofteeth = true;
     }
     elseif($_GET['type'] == "insert" ){
       $sanimg = "insert.png";
       $sanhome = "insert.jpg";
-      $numofteeth = true;
     }
     elseif($_GET['type'] == "other" ){
-      $sanimg = "other.png";
-      $sanhome = "other.jpg";
-      $numofteeth = true;
+      // $sanimg = "other.png";
+      // $sanhome = "other.jpg";
+      $sanimg = "drill.png";
+      $sanhome = "drill.jpg";
     }
     else{
         http_response_code(404);
@@ -91,7 +87,6 @@
 
         <div id="listsubtype" class="list-group list-group-horizontal text-nowrap overflow-auto">
                   <?php 
-                      $phpArray = array();
                       $sql = "SELECT * FROM a_image WHERE type = '".$_GET['type']."' ORDER BY `order` ASC;";
                       $result = mysqli_query($con, $sql);
                    if ($result->num_rows > 0) {
@@ -99,7 +94,7 @@
                   while($rowimg = $result->fetch_assoc()) {
                   ?> 
                       
-                      <figure class="list-group-item list-group-item-action text-center "  data-toggle="list" onClick="imagedraw('<?php echo $rowimg["imgid"];?>')">
+                      <figure class="list-group-item list-group-item-action text-center "  data-toggle="list" onClick="imagedraw('<?php echo $rowimg["imgid"];?>' , '<?php echo $rowimg["disable"]; ?>', '<?php echo $rowimg["subtype"]; ?>')">
                               <img src="images/mattype/<?php echo $rowimg["name"]; ?>" alt="x" >
                               <figcaption><?php echo $rowimg["description"]; ?></figcaption>
                           </figure>
@@ -113,21 +108,52 @@
        
         <br>
           <div  id="imgdraw" class="row">
+                <!-- <div class="col-sm-12 col-md-12 col-lg-4 imgdraw mb-3"><img src="images/datatype/ballendmill.png" class="rounded  img-fluid  img-thumbnail  "  ></div> -->
+                <!-- <div class="col-sm-12 col-md-12 col-lg-4 imgdraw mb-3"><img src="images/datatype/ballendmill.png" class="rounded  img-fluid  img-thumbnail  "  ></div> -->
+                <!-- <div class="col-sm-12 col-md-12 col-lg-4 imgdraw mb-3"><img src="images/datatype/ballendmill.png" class="rounded  img-fluid  img-thumbnail  "  ></div> -->
+                <!-- <div class="col-sm-12 col-md-12 col-lg-4 imgdraw mb-3"><img src="images/datatype/ballendmill.png" class="rounded  img-fluid  img-thumbnail  "  ></div> -->
+                <!-- <div class="col-sm-12 col-md-12 col-lg-4 imgdraw mb-3"><img src="images/datatype/ballendmill.png" class="rounded  img-fluid  img-thumbnail  "  ></div> -->
+                <!-- <div class="col-sm-12 col-md-12 col-lg-4 imgdraw mb-3"><img src="images/datatype/ballendmill.png" class="rounded  img-fluid  img-thumbnail  "  ></div> -->
+                <!-- <div class="col-sm-12 col-md-12 col-lg-4 imgdraw mb-3"><img src="images/datatype/ballendmill.png" class="rounded  img-fluid  img-thumbnail  "  ></div> -->
+                <!-- <div class="col-sm-12 col-md-12 col-lg-4 imgdraw mb-3"><img src="images/datatype/ballendmill.png" class="rounded  img-fluid  img-thumbnail  "  ></div> -->
           </div>
 
         
-        <br>
-        <hr>
-        <div class="form-group row">
+        <!-- <br> -->
+        <hr class="imgmain">
+
+        <div class="row imgmain"  >
+            <div class="col-sm-12 col-md-12 col-lg-12 text-center " id="imgmain" >
+              <!-- <img  src="images/datatype/ballendmill.png" class="rounded  img-fluid  img-thumbnail"  > -->
+            </div>
+            <div class="col-sm-12 col-md-12 col-lg-12 ">
+              <button type="button" id="btnimg" class="btn btn-primary">กลับ</button>
+            </div>
+        </div>          
+        <hr class="imgmain">
+        
+        <!-- BODY START -->
+      <div id="content">
+
+
+      <div id="measure">
+        <div class="form-group row" >
             <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label ">Measure:</label> 
         </div>
-
-        <div class="form-group row mx-md-n5">
+        <div  class="form-group row mx-md-n5 gethidden" >
             <label class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 diameterhead">d1:</label>
             <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 diameterhead">
               <input type="number" min="0" max="100"   class="form-control" id="txtdiameterhead"  name="txtdiameterhead"  >
               <div class="input-group-append ">
-                <span class="input-group-text">mm.</span>
+                <span class="input-group-text form-control">mm.</span>
+              </div>
+            </div>
+
+            <label class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 diameterhead2">d2:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 diameterhead2">
+              <input type="number" min="0" max="100"   class="form-control" id="txtdiameterhead2"  name="txtdiameterhead2"  >
+              <div class="input-group-append ">
+                <span class="input-group-text form-control">mm.</span>
               </div>
             </div>
             
@@ -135,7 +161,15 @@
             <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 diameterbase">
               <input type="number"  class="form-control" id="txtdiameterbase" min="0" max="100" name="txtdiameterbase"  >
               <div class="input-group-append">
-                <span class="input-group-text" >mm.</span>
+                <span class="input-group-text form-control" >mm.</span>
+              </div>
+            </div>
+
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 diameterbase2">D2:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 diameterbase2">
+              <input type="number"  class="form-control" id="txtdiameterbase2" min="0" max="100" name="txtdiameterbase2"  >
+              <div class="input-group-append">
+                <span class="input-group-text form-control" >mm.</span>
               </div>
             </div>
 
@@ -143,7 +177,7 @@
             <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 clength">
               <input type="number"  class="form-control" id="txtclength" name="txtclength"  min="0" max="160" >
               <div class="input-group-append">
-                <span class="input-group-text" >mm.</span>
+                <span class="input-group-text form-control" >mm.</span>
               </div>
             </div>     
 
@@ -151,7 +185,7 @@
             <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 flength">
               <input type="number"  class="form-control" id="txtflength" name="txtflength"  min="0" max="160" >
               <div class="input-group-append">
-                <span class="input-group-text">mm.</span>
+                <span class="input-group-text form-control">mm.</span>
               </div>
             </div>     
             
@@ -159,7 +193,7 @@
             <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 length">
               <input type="number"  class="form-control" id="txtlength" name="txtlength" min="0" max="300" >
               <div class="input-group-append">
-                <span class="input-group-text" >mm.</span>
+                <span class="input-group-text form-control" >mm.</span>
               </div>
             </div>
 
@@ -167,23 +201,51 @@
             <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 lengthead">
               <input type="number"  class="form-control" id="txtlengthead" name="txtlengthead" min="0" max="300" >
               <div class="input-group-append">
-                <span class="input-group-text" >mm.</span>
+                <span class="input-group-text form-control" >mm.</span>
               </div>
             </div>
 
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 radius">R1:</label>
+            
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 lengthead2">L2:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 lengthead2">
+              <input type="number"  class="form-control" id="txtlengthead2" name="txtlengthead2" min="0" max="300" >
+              <div class="input-group-append">
+                <span class="input-group-text form-control" >mm.</span>
+              </div>
+            </div>
+            
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 radius">R:</label>
             <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 radius">
               <input type="number"  class="form-control" id="txtradius" name="txtradius" min="0" max="300" >
               <div class="input-group-append">
-                <span class="input-group-text" >mm.</span>
+                <span class="input-group-text form-control" >mm.</span>
               </div>
             </div>
+
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 radiushead">R1:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 radiushead">
+              <input type="number"  class="form-control" id="txtradiushead" name="txtradiushead" min="0" max="300" >
+              <div class="input-group-append">
+                <span class="input-group-text form-control" >mm.</span>
+              </div>
+            </div>
+
+            
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 radiushead2">R2:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 radiushead2">
+              <input type="number"  class="form-control" id="txtradiushead2" name="txtradiushead2" min="0" max="300" >
+              <div class="input-group-append">
+                <span class="input-group-text form-control" >mm.</span>
+              </div>
+            </div>
+
+           
             
             <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 thread" >Tr:</label>
             <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 thread">
               <input type="number"  class="form-control" id="txtthread" name="txtthread" min="0" max="300" >
               <div class="input-group-append">
-                <span class="input-group-text" >mm.</span>
+                <span class="input-group-text form-control" >mm.</span>
               </div>
             </div>
 
@@ -191,19 +253,20 @@
             <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 angle">
               <input type="number"  class="form-control" id="txtangle" name="txtangle" min="0" max="60" >
               <div class="input-group-append">
-                <span class="input-group-text" >°</span>
+                <span class="input-group-text form-control " >°</span>
               </div>
             </div>
-        </div>
-          
-          <p>D1 --> min-max (0-100)  </p>
-          <hr>
-        <div class="form-group row">
-            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label ">คุณสมบัติ:</label> 
-        </div>
-        <div class="form-group row">
-            <label class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">HELIX:</label>
-            <div class="col-sm-12 col-md-12 col-lg-3">
+
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 anglestep">Angle Step:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 input-group mb-3 anglestep">
+              <input type="number"  class="form-control" id="txtanglestep" name="txtanglestep" min="0" max="60" >
+              <div class="input-group-append">
+                <span class="input-group-text form-control " >°</span>
+              </div>
+            </div>
+
+            <label class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright mb-3 helix">HELIX:</label>
+            <div class="col-sm-12 col-md-12 col-lg-3 mb-3 helix">
               <select id="slchelix" name="slchelix" class="form-select form-control" >
               <option value="" hidden selected>Open this select menu</option>
                 <option value="10°">10°</option>
@@ -215,24 +278,30 @@
                 <option value="45°">45°</option>
                 <option value="60°">60°</option>
               </select>
-            </div>
-
-            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">MATERIAL:</label>
-            <div class="col-sm-12 col-md-12 col-lg-3">
-              <select id="slctoolmaterial" name="slctoolmaterial" class="form-select form-control" >
-                <option value="" hidden selected>Select menu</option>
-                <option value="Carbide">Carbide</option>
-                <option value="HSS">HSS</option>
-                <option value="PCD">PCD</option>
-                <option value="CBN">CBN</option>
-                <option value="Other">Other</option>
-              </select>
-              <input type="text"  class="form-control" id="txttoolmaterial" name="txttoolmaterial" style="display:none;" value="<?php echo $row['destoolmaterial']; ?>" >
-            </div>
+              </div>
+            
+            
         </div>
+        <hr>
+        <div class="form-group row">
+              <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright pt-3 numofteeth">Number of Teeth:</label>
+              <div class="col-sm-12 col-md-12 col-lg-1 pt-2 numofteeth">
+                <input type="number"  class="form-control" id="numofteeth" name="numofteeth"  min="1" max="8"  >
+              </div>
+              <div class="col-sm-12 col-md-12 col-lg-9 numofteeth">
+                  <div id="numteethimg" class="form-group row">
+                  </div>
+            </div>
+         </div>
+        <hr class="numofteeth">
+      </div>           
+
 
         <div class="form-group row">
-        <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">MATERIAL:</label>
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label ">คุณสมบัติ:</label> 
+        </div>
+        <div class="form-group row">
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">MATERIAL:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
               <select id="slctoolmaterial" name="slctoolmaterial" class="form-select form-control" >
                 <option value="" hidden selected>Select menu</option>
@@ -244,7 +313,8 @@
               </select>
               <input type="text"  class="form-control" id="txttoolmaterial" name="txttoolmaterial" style="display:none;" value="<?php echo $row['destoolmaterial']; ?>" >
             </div>
-        <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">COATING:</label>
+
+            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">COATING:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
               <select id="slccoating" name="slccoating" class="form-select form-control" >
               <option value="" hidden selected>Select menu</option>
@@ -260,43 +330,14 @@
               </select>
               <input type="text"  class="form-control" id="txtcoating" name="txtcoating" style="display:none;" value="<?php echo $row['descoating']; ?>"  >
             </div>
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Coating Color:</label>
+            <div class="col-sm-12 col-md-12 col-lg-2">
+                <input type="text"  class="form-control" id="txtcoatingcolor" name="txtcoatingcolor"  >
+            </div>
         </div>
-
-          <div class="form-group row">
-            <?php if ($numofteeth == true) { ?>
-              <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright pt-3">Number of Teeth:</label>
-              <div class="col-sm-12 col-md-12 col-lg-1 pt-2">
-                <input type="number"  class="form-control" id="numofteeth" name="numofteeth"  min="1" max="8"  >
-              </div>
-              <!-- <br class="newline"> -->
-              <div class="col-sm-12 col-md-12 col-lg-9">
-                  <div class="form-group row">
-                      <div class="col-sm-12 col-md-12 col-lg-2 mb-3">
-                        <img id="imageId1" class="img-thumbnail mb-3" src="images/40x40.png">
-                      </div>
-                      <div class="col-sm-12 col-md-12 col-lg-2 mb-3">
-                        <img id="imageId2" class="img-thumbnail" src="images/40x40.png">
-                      </div>
-                      <div class="col-sm-12 col-md-12 col-lg-2 mb-3">
-                        <img id="imageId3"  class="img-thumbnail" src="images/40x40.png">
-                      </div>
-                      <div class="col-sm-12 col-md-12 col-lg-2 mb-3">
-                        <img id="imageId4" class="img-thumbnail"  src="images/40x40.png">
-                      </div>
-                      <div class="col-sm-12 col-md-12 col-lg-2 mb-3">
-                        <img id="imageId5" class="img-thumbnail"  src="images/40x40.png">
-                      </div>
-                      <div class="col-sm-12 col-md-12 col-lg-2 mb-3">
-                        <img id="imageId6" class="img-thumbnail" src="images/40x40.png">
-                      </div>
-                  </div>
-              </div>
-            <?php } ?>
-          
-          </div>
-
-          <div class="form-group row justify-content-end">
-               <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">Work Material:</label>
+          <!-- <hr> -->
+          <div class="form-group row ">
+               <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">Work Material:</label>
             <div class="col-sm-12 col-md-12 col-lg-3">
               <input type="text"  class="form-control" id="txtworkmaterial" name="txtworkmaterial"  >
             </div>
@@ -312,20 +353,16 @@
               <input type="text"  class="form-control" id="txtmachine" name="txtmachine"  style="display:none;">
             </div>
 
-            <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label">QUANTITY:</label>
+            <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label labelright">QUANTITY:</label>
               <div class="col-sm-12 col-md-12 col-lg-2">
-                <input  type="number"  min="1"  class="form-control" id="txtqua" name="txtqua" value="1" >
+                <input  type="number"  min="1"  class="form-control" id="txtquality" name="txtquality" value="1" >
             </div>
           </div>
-
-      
-
           <!-- <br> -->
           <hr>
           <div class="form-group row">
             <label  class="col-sm-12 col-md-12 col-lg-2 col-form-label ">ลักษณะการใช้งาน:</label> 
           </div>
-
         <div class="form-group row align-items-center">
             <div class="col-sm-12 col-md-12 col-lg-3 padt">
               <div class="form-check mb-3 ">
@@ -439,7 +476,8 @@
                 <span  id="txtfupload1" class="form-control"></span>
                 <span class="input-group-btn">
                   <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
-                  <input  name="fupload1" id="fupload1"  accept=".jpg,.png,.doc,.docx,application/pdf,.sldprt ,.sldasm ,.slddrw ,.slddrt" style="display: none;" type="file">
+                  <input  name="fupload1" id="fupload1"  accept=".jpg,.png,.doc,.docx,application/pdf,.sldprt ,.sldasm ,.slddrw ,.slddrt" style="display: none;"   type="file">
+                  <button class="btn btn-primary" onclick='uploadrest(1)' >Reset</button>
                 </span>
               </div>
             </div>
@@ -453,13 +491,12 @@
                 <span  id="txtfupload2" class="form-control"></span>
                 <span class="input-group-btn">
                   <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
-                  <input name="fupload2" id="fupload2"  accept=".jpg,.png,.doc,.docx,application/pdf,.sldprt ,.sldasm ,.slddrw ,.slddrt" style="display: none;" type="file">
+                  <input name="fupload2" id="fupload2"  accept=".jpg,.png,.doc,.docx,application/pdf,.sldprt ,.sldasm ,.slddrw ,.slddrt" style="display: none;"  type="file">
+                  <button class="btn btn-primary" onclick='uploadrest(2)' >Reset</button>
                 </span>
               </div>
             </div>
           </div>
-
-
           <div class="form-group row">
             <label class="col-form-label">Drawing Attach File 3:</label>
             <div class="col-sm-12 col-md-12 col-lg-5">
@@ -467,20 +504,16 @@
                 <span  id="txtfupload3" class="form-control"></span>
                 <span class="input-group-btn">
                   <span class="btn btn-primary" onclick="$(this).parent().find('input[type=file]').click();">Browse</span>
-                  <input name="fupload3" id="fupload3"  accept=".jpg,.png,.doc,.docx,application/pdf,.sldprt ,.sldasm ,.slddrw ,.slddrt" style="display: none;" type="file">
+                  <input name="fupload3" id="fupload3"  accept=".jpg,.png,.doc,.docx,application/pdf,.sldprt ,.sldasm ,.slddrw ,.slddrt" style="display: none;"  type="file">
+                  <button class="btn btn-primary" onclick='uploadrest(3)' >Reset</button>
                 </span>
               </div>
             </div>
           </div>
-
-
-
-
         <div class="form-group">
           <label for="description">More Description</label>
           <textarea class="form-control rounded-0" id="txtdes" name="txtdes" rows="5"></textarea>
         </div>
-
         <br>
         <div class="form-group row">
               <label  class="col-sm-12 col-md-12 col-lg-1 col-form-label labelright">ชื่อ:</label>
@@ -547,11 +580,11 @@
                   <input type="text"  class="form-control" id="txtphone" name="txtphone" value="<?php echo $row['phone'];?>"  >
                 </div>
          </div> 
-
-
+        </div> 
         <hr>
+
           <div class="form-group row">
-                <div class="col-sm-12 col-md-12 col-lg-2">
+                <div class="col-sm-12 col-md-12 col-lg-2 btnconfirm">
                   <p class="newline"><p>
                   <button type="button" class="btn btn-primary " id="txtconfirm">Confirm</button>
                 </div> 
@@ -559,12 +592,12 @@
 
                 <div class="col-sm-12 col-md-12 col-lg-2">
                   <p class="newline"><p>
-                  <button type="button" class="btn btn-danger " id="txtback" onclick="window.location='index.php';" >Back Home</button>
-                </div> 
-        </div> 
-
-        <!-- END -->
+                <button type="button" class="btn btn-danger " id="txtback" onclick="window.location='index.php';" >Back Home</button>
+          </div> 
+         <!-- BODY END -->
       </div>
+        <!-- END -->
+    </div>
       
 </section>
 </form>

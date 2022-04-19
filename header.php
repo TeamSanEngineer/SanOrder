@@ -313,5 +313,8 @@ input[type=checkbox]
     min-height: 300px;
 }
 
+.gethidden{
+  /* display: none; */
+}
 
 </style>

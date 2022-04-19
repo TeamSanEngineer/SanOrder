@@ -35,4 +35,36 @@
   $('.radius').toggle(<?php echo $radius ?>); 
   $('.thread').toggle(<?php echo $thread ?>); 
   $('.angle').toggle(<?php echo $angle ?>); 
+
+  $('.radiushead').toggle(<?php echo $radiushead ?>); 
+  $('.numofteeth').toggle(<?php echo $numofteethchk ?>); 
+  $('.helix').toggle(<?php echo $helix ?>); 
+
+
+  $('.diameterhead2').toggle(<?php echo $diameterhead2 ?>); 
+  $('.diameterbase2').toggle(<?php echo $diameterbase2 ?>); 
+  $('.lengthead2').toggle(<?php echo $lengthead2 ?>); 
+  $('.radiushead2').toggle(<?php echo $radiushead2 ?>); 
+  $('.anglestep').toggle(<?php echo $anglestep ?>); 
+  
+
+  if("<?php echo $_GET['type'];?>" == "other")
+{
+  $('.imgmain').toggle(false); 
+  $('#measure ').toggle(false);
+  // othertype()
+}
+else{
+  if( "<?php echo $measuredisable ?>" == "true"){
+    $('.imgmain').toggle(false); 
+    $('#measure ').toggle(false);
+  }
+}
+
+console.log("GET"+"<?php echo $measuredisable ?>")
+// else
+// {
+//   // checkstartmenuedit()
+// }
+
 </script>

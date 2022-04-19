@@ -7,7 +7,7 @@
     <!-- <a class="navbar-brand" href="#">San Engineering</a> -->
     <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
       <li class="nav-item active">
-        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href=".">Home <span class="sr-only">(current)</span></a>
       </li>
       <!-- <li class="nav-item">
         <a class="nav-link" href="#">Link</a>
@@ -20,8 +20,6 @@
           Products
         </a>
         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-          <!-- <li><a class="dropdown-item" href="#">Action</a></li> -->
-          <!-- <li><a class="dropdown-item" href="#">Another action</a></li> -->
           <a class="dropdown-item" href="order.php?type=drill">Drill</a>
           <a class="dropdown-item" href="order.php?type=endmill">Endmill</a>
           <a class="dropdown-item" href="order.php?type=bite">Bite</a>
@@ -30,69 +28,22 @@
           <a class="dropdown-item" href="order.php?type=cutter">Cutter</a>
           <a class="dropdown-item" href="order.php?type=insert">Insert</a>
           <a class="dropdown-item" href="order.php?type=other">Other</a>
-          <!-- <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Drill</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu action</a></li>
-              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Endmill</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu action</a></li>
-              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Bite</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu action</a></li>
-              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
-            </ul>
-          </li>
-
-
-          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Part</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu action</a></li>
-              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Reamer</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu action</a></li>
-              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Cutter</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu action</a></li>
-              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Insert</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu action</a></li>
-              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
-            </ul>
-          </li>
-
-          <li class="dropdown-submenu"><a class="dropdown-item dropdown-toggle" href="#">Other</a>
-            <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Submenu action</a></li>
-              <li><a class="dropdown-item" href="#">Another submenu action</a></li>
-            </ul>
-          </li> -->
         </ul>
       </li>
 
       <li class="nav-item">
             <a class="nav-link" style="color:white" href="displayorder.php">Details </a>
-          </li>
+      </li>
 
+      <?php  if( !isset($_SESSION["UserID"]) ) { ?>
+       
+      <?php } else{?>
+            <?php  if( $_SESSION["Level"] == 'admin'  ) { ?>
+            <li class="nav-item">
+              <a class="nav-link" style="color:white" href="admin">ADMIN</a>
+            </li>
+            <?php }?>
+        <?php }?>
     </ul>
 
 
@@ -115,8 +66,8 @@
                     </a>
                     <div class="dropdown-menu dropdown-menu-right">                      
                     <?php  if( $_SESSION["Level"] == 'admin'  ) { ?>
-                    <span class="dropdown-item"  >ผู้ดูแลระบบ</span>
-                    <!-- <a class="dropdown-item"  href="https://mypcu-data.net/academy/inputadmin/index.php" >สำหรับผู้ดูแลระบบ</a>  -->
+                    <!-- <span class="dropdown-item"  >ผู้ดูแลระบบ</span> -->
+                    <a class="dropdown-item"  href="admin" >สำหรับผู้ดูแลระบบ</a> 
                     <hr> 
                     <?php }?>
                      <a class="dropdown-item"  href="../sanorder/editregister.php" >แก้ไขข้อมูล</a>

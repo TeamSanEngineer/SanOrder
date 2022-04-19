@@ -21,9 +21,9 @@ try {
 	$d_frist=date('Y-m-d H:i:s', strtotime('+543 year'));
 
 	$sql = "INSERT INTO `a_san_order`(`orderid`,`diameterhead`,`diameterbase`,`flength`,`length`,`helix`,`toolmaterial`,`coating`,`workmaterial`,`machine`,
-	`quality`,`description`,`denti`,`d_frist`,`userrecord`,`fristname`,`lastname`,`tel`,`fileupload1`,`fileupload2`,`fileupload3`,`numteeth`,`status`,`type`,
+	`quality`,`description`,`d_frist`,`userrecord`,`fristname`,`lastname`,`tel`,`fileupload1`,`fileupload2`,`fileupload3`,`numteeth`,`status`,`type`,
 	`companyname`,`address`,`road`,`tambon`,`amphur`,`province`,`postcode`,`email`,`destoolmaterial`,`descoating`,`desmachine`,`coolant`,`usdrillchk`,`usdrilltxt`,`usbrkchk`,`usbrkntchk`,`usbitechk`,`usbitetxt`,`usscoopchk`,
-	`usscooptxt`,`uslathechk`,`uslathetxt`,`usotherchk`,`usothertxt`,`coatingcolor`,`imgid`,`subid`,`radius`,`thread`,`lengthead`,`angle`,`clength`) 
+	`usscooptxt`,`uslathechk`,`uslathetxt`,`usotherchk`,`usothertxt`,`coatingcolor`,`imgid`,`subid`,`radius`,`thread`,`lengthead`,`angle`,`clength`,`radiushead`,`subtype`,`anglestep`,`diameterhead2`,`lengthead2`,`diameterbase2`,`radiushead2`) 
 
 
 
@@ -31,7 +31,7 @@ try {
 
 	VALUES ('$orderid','".$_POST['txtdiameterhead']."','".$_POST['txtdiameterbase']."'
 	,'".$_POST['txtflength']."','".$_POST['txtlength']."','".$_POST['slchelix']."','".$_POST['slctoolmaterial']."','".$_POST['slccoating']."','".$_POST['txtworkmaterial']."','".$_POST['slcmachine']."',
-	'".$_POST['txtqua']."','".$_POST['txtdes']."','".$_POST['txtden']."','$d_frist','".$_POST['userid']."','".$_POST['txtfname']."'
+	'".$_POST['txtquality']."','".$_POST['txtdes']."','$d_frist','".$_POST['userid']."','".$_POST['txtfname']."'
     ,'".$_POST['txtlname']."','".$_POST['txtphone']."','".$_FILES["fupload1"]["name"]."','".$_FILES["fupload2"]["name"]."','".$_FILES["fupload3"]["name"]."','".$_POST['numofteeth']."','pending','".$_POST['sandatatype']."'
 	,'".$_POST['txtcompanyname']."','".$_POST['txtaddress']."','".$_POST['txtroad']."','".$_POST['txtdistricts']."','".$_POST['txtamphures']."','".$_POST['txtprovinces']."'
 	,'".$_POST['txtzipcode']."','".$_POST['txtemail']."','".$_POST['txttoolmaterial']."','".$_POST['txtcoating']."','".$_POST['txtmachine']."','".$_POST['slccoolant']."'
@@ -39,7 +39,9 @@ try {
 	,'".$_POST['usbitechk']."','".$_POST['txtusagebite']."','".$_POST['usscoopchk']."','".$_POST['txtusagescoop']."'
 	,'".$_POST['uslathechk']."','".$_POST['txtusagelathe']."','".$_POST['usotherchk']."','".$_POST['txtusageother']."'
 	,'".$_POST['txtcoatingcolor']."','".$_POST['imgid']."','".$_POST['subid']."','".$_POST['txtradius']."'
-	,'".$_POST['txtthread']."','".$_POST['txtlengthead']."','".$_POST['txtangle']."','".$_POST['txtclength']."')";
+	,'".$_POST['txtthread']."','".$_POST['txtlengthead']."','".$_POST['txtangle']."','".$_POST['txtclength']."'
+	,'".$_POST['txtradiushead']."','".$_POST['subtype']."','".$_POST['txtanglestep']."','".$_POST['txtdiameterhead2']."'
+	,'".$_POST['txtlengthead2']."','".$_POST['txtdiameterbase2']."','".$_POST['txtradiushead2']."')";
 
 	if (mysqli_query($con, $sql))
 	 {
@@ -83,7 +85,7 @@ $response = array(
 	'txtradius' => $_POST['txtradius'],
 	'txtthread' => $_POST['txtthread'],
 	'txtangle' => $_POST['txtangle'],
-	'txtqua' => $_POST['txtqua'],
+	'txtquality' => $_POST['txtquality'],
 
 	'slchelix' => $_POST['slchelix'],
 	'slctoolmaterial' => $_POST['slctoolmaterial'],

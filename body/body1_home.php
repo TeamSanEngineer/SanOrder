@@ -62,7 +62,7 @@
                 <div class="col-sm-12  col-md-6 col-lg-3 col-xs-3 ">
                 <figure class="figure">
                 <a href="order.php?type=other"><img  src="images/home/part.jpg" class="figure-img img-fluid rounded border border-dark imgtransparent" alt="Other"></a>
-                    <figcaption class="figure-caption text-center"><h4><a href="order.php?type=other">อื่นๆ</a></h4></figcaption>
+                    <figcaption class="figure-caption text-center"><h4><a href="order.php?type=other">สั่งทำพิเศษ</a></h4></figcaption>
                 </figure>
                 </div>
             </div>
